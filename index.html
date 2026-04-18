@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoncierChain | Registre Foncier Blockchain</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #030816;
+            --accent-green: #10B981;
+            --accent-orange: #F59E0B;
+            --accent-glow: rgba(16, 185, 129, 0.6);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --bg-glass: rgba(255, 255, 255, 0.02);
+            --text-muted: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 70px 70px;
+        }
+
+        /* --- SYSTÈME DE LUCIOLES UNIFIÉ --- */
+        #firefly-box { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .firefly { position: absolute; width: 3px; height: 3px; background: var(--accent-green); border-radius: 50%; opacity: 0; animation: move-firefly linear infinite; box-shadow: 0 0 10px var(--accent-green); }
+        @keyframes move-firefly {
+            0% { transform: translate(0, 0); opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { transform: translate(var(--move-x), var(--move-y)); opacity: 0; }
+        }
+
+        /* --- NAVIGATION --- */
+        header { 
+            border-bottom: 1px solid var(--border-glass); 
+            background: rgba(3, 8, 22, 0.85); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .navbar-brand { font-weight: 700; font-size: 1.3rem; }
+        .navbar-brand span { color: var(--accent-green); }
+        .nav-link { font-size: 0.85rem; color: var(--text-muted) !important; margin: 0 10px; transition: 0.3s; }
+        .nav-link:hover { color: var(--accent-green) !important; }
+        .btn-portal-nav { background: var(--accent-green); color: #000; font-weight: 700; border-radius: 50px; padding: 10px 24px; border: none; font-size: 0.85rem; transition: 0.3s; text-decoration: none; }
+        .btn-portal-nav:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--accent-glow); color: #000; }
+
+        @media (max-width: 991.98px) {
+            .navbar-collapse { background: rgba(3, 8, 22, 0.98); backdrop-filter: blur(15px); margin-top: 15px; padding: 20px; border-radius: 15px; border: 1px solid var(--border-glass); }
+            .nav-link { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        }
+
+        /* --- TITRES DE SECTION --- */
+        .section-tag { color: var(--accent-green); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; text-align: center; display: block; }
+        .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -2px; text-align: center; margin-bottom: 2rem; }
+        .section-desc { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; max-width: 700px; margin: 0 auto 60px; text-align: center; }
+
+        /* --- SECTION 1 : HERO --- */
+        .hero { padding: 160px 0 100px; position: relative; z-index: 2; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.8rem); font-weight: 700; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem; }
+        .hero-desc { color: var(--text-muted); font-size: clamp(1rem, 2vw, 1.15rem); max-width: 620px; margin-bottom: 40px; }
+        .btn-verify { background: var(--accent-green); color: #fff; font-weight: 600; border-radius: 12px; padding: 16px 32px; border: none; box-shadow: 0 0 20px var(--accent-glow); transition: 0.3s; text-decoration: none; display: inline-block;}
+        .btn-outline-custom { background: transparent; color: #fff; border: 1px solid var(--border-glass); border-radius: 12px; padding: 16px 32px; transition: 0.3s; text-decoration: none; display: inline-block; }
+        
+        .hero .img-container { position: relative; display: inline-block; width: 100%; max-width: 500px; }
+        .main-img { width: 100%; border-radius: 40px; border: 1px solid var(--border-glass); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .floating-tag { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--border-glass); border-radius: 14px; padding: 10px 15px; position: absolute; z-index: 10; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .tag-status-verif { top: 10%; left: -5%; }
+        .tag-asset-id { top: 40%; right: -10%; width: 200px; }
+        .tag-parcelle-madibou { bottom: 10%; left: -2%; width: 180px; }
+        .stat-label-hero { font-size: 0.55rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; display: block; }
+        .stat-val { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 700; display: block; }
+
+        /* --- SECTION 2 : CRISE --- */
+        #crise { padding: 100px 0; position: relative; z-index: 2; }
+        .content-card { background: rgba(0, 0, 0, 0.3); border: 1px solid var(--border-glass); border-radius: 24px; overflow: hidden; height: 100%; max-width: 520px; margin: 0 auto; position: relative; }
+        .crise-img-container { position: relative; height: 220px; }
+        .img-header-chaos, .img-header-solution { height: 100%; background-size: cover; background-position: center; border-bottom: 1px solid var(--border-glass); }
+        .floating-badge { position: absolute; top: 15px; left: 15px; padding: 6px 14px; border-radius: 50px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; backdrop-filter: blur(8px); display: flex; align-items: center; gap: 6px; }
+        .badge-old { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: var(--accent-orange); }
+        .badge-new { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent-green); }
+        .card-body-crise { padding: 35px; }
+        .card-title-crise { font-size: 1.6rem; font-weight: 700; margin-bottom: 20px; }
+        .crise-list { list-style: none; padding: 0; margin: 0; }
+        .crise-list li { position: relative; padding-left: 25px; margin-bottom: 12px; font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+        .chaos-item::before { content: " ✕ "; position: absolute; left: 0; color: var(--accent-orange); font-weight: 700; }
+        .solution-item::before { content: " ✓ "; position: absolute; left: 0; color: var(--accent-green); font-weight: 700; }
+
+                .fiche-parcelle {
+            background: rgba(16, 185, 129, 0.03);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: left;
+            position: relative;
+        }
+        .fiche-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .fiche-label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+        .status-dot { width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 8px var(--accent-green); }
+        .status-text { color: var(--accent-green); font-size: 0.75rem; font-weight: 600; }
+        .parcelle-id { font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 8px; display: block; }
+        .fiche-info { font-size: 0.75rem; color: var(--text-muted); line-height: 1.6; }
+        .fiche-info strong { color: rgba(255,255,255,0.8); font-weight: 500; }
+
+        /* --- STATISTIQUES --- */
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 30px 15px;
+        }
+
+        /* --- SECTION 3 : MOTEUR DE RECHERCHE --- */
+        #verification { padding: 100px 0; position: relative; z-index: 2; }
+        .search-bar-container { max-width: 750px; margin: 0 auto; }
+        .search-input-wrapper { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; display: flex; align-items: center; padding: 8px; transition: 0.3s; }
+        .search-input-wrapper:focus-within { border-color: var(--accent-green); box-shadow: 0 0 15px rgba(16, 185, 129, 0.1); }
+        .search-prefix { color: var(--accent-green); padding-left: 15px; font-family: monospace; font-weight: bold; }
+        .search-input { background: transparent; border: none; color: #fff; padding: 12px 15px; width: 100%; font-size: 0.95rem; }
+        .search-input:focus { outline: none; }
+        .btn-search { background: var(--accent-green); color: #000; border: none; border-radius: 8px; padding: 12px 24px; font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 8px; transition: 0.3s; white-space: nowrap; }
+        .suggestions { margin-top: 25px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .chip { background: rgba(16, 185, 129, 0.05); color: var(--accent-green); border: 1px solid rgba(16, 185, 129, 0.2); padding: 5px 14px; border-radius: 50px; cursor: pointer; transition: 0.2s; }
+        .result-card { background: var(--bg-glass); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 20px; max-width: 750px; margin: 40px auto 0; text-align: left; padding: 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 25px; }
+        .info-box { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: 12px; padding: 18px; }
+        .hash-box { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: 12px; padding: 18px; margin-top: 15px; }
+        .hash-value { font-family: monospace; color: var(--accent-green); font-size: 0.75rem; word-break: break-all; margin-top: 5px; }
+        .status-tag { border: 1px solid rgba(16, 185, 129, 0.4); color: var(--accent-green); font-size: 0.7rem; padding: 5px 12px; border-radius: 50px; margin-right: 8px; margin-top: 15px; display: inline-block; }
+
+        /* --- SECTION 4 : ÉCOSYSTÈME --- */
+        #ecosysteme { padding: 100px 0; position: relative; z-index: 2; }
+        .pillar-card { background: var(--bg-glass); border: 1px solid var(--border-glass); border-radius: 20px; height: 100%; padding: 35px; text-align: left; transition: 0.3s; display: flex; flex-direction: column; }
+        .pillar-card:hover { border-color: rgba(16, 185, 129, 0.3); transform: translateY(-5px); }
+        .pillar-icon-box { background: rgba(16, 185, 129, 0.1); border-radius: 8px; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--accent-green); }
+        .pillar-tag { color: var(--accent-green); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-left: 10px; }
+        .pillar-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 15px; }
+        .pillar-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
+        .feature-list { list-style: none; padding: 0; margin-bottom: 30px; }
+        .feature-list li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .btn-pillar { background: var(--accent-green); color: #000; border: none; border-radius: 50px; padding: 10px 25px; font-weight: 600; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 10px; text-decoration: none; width: fit-content; transition: 0.3s; }
+        .btn-pillar:hover { transform: scale(1.05); color: #000; }
+        .pillar-img { width: 100%; height: 150px; object-fit: cover; border-radius: 12px; margin-bottom: 25px; border: 1px solid var(--border-glass); }
+        .mini-badge { background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); color: var(--accent-green); font-size: 0.7rem; padding: 4px 12px; border-radius: 50px; margin-right: 5px; }
+        
+        /* Stats Bar & Store Buttons */
+        .mobile-preview { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 15px; padding: 20px; text-align: center; margin-bottom: 25px; }
+        .store-btns { display: flex; gap: 10px; }
+        .btn-store { background: #000; border: 1px solid var(--border-glass); color: #fff; padding: 8px 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px; text-decoration: none; flex: 1; transition: 0.3s; }
+        .btn-store:hover { border-color: var(--accent-green); background: #050a18; }
+        .store-main { font-size: 0.8rem; font-weight: 700; display: block; }
+        .store-sub { font-size: 0.55rem; text-transform: uppercase; opacity: 0.7; display: block; }
+        .stats-bar { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: 16px; padding: 30px; margin-top: 60px; }
+        .stat-item { text-align: center; }
+        .stat-icon-circle { color: var(--accent-green); background: rgba(16, 185, 129, 0.1); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; }
+        .stat-label-footer { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- SECTION 5 : CTA TRANSITION --- */
+        .cta-transition {
+            padding: 140px 0;
+            position: relative;
+            background-color: var(--bg-deep);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .cta-content { position: relative; z-index: 10; }
+        .cta-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1px; }
+        .text-accent { color: var(--accent-green); }
+        .cta-desc { color: var(--text-muted); font-size: 1.2rem; max-width: 750px; margin: 0 auto 50px; line-height: 1.7; }
+        .cta-btns-group { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-main { background-color: var(--accent-green); color: #000 !important; padding: 18px 40px; border-radius: 50px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; box-shadow: 0 0 30px rgba(16, 185, 129, 0.4); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 0 50px rgba(16, 185, 129, 0.6); background-color: #0ea371; }
+        .btn-secondary-outline { background: rgba(255, 255, 255, 0.03); color: #fff !important; border: 1px solid var(--border-glass); padding: 18px 40px; border-radius: 50px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; transition: all 0.3s ease; }
+        .btn-secondary-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-5px); }
+
+        @media (max-width: 991.98px) {
+            .hero { text-align: center; padding-top: 120px; }
+            .hero-desc { margin: 0 auto 40px; }
+            .info-grid { grid-template-columns: 1fr; }
+            .search-input-wrapper { flex-direction: column; padding: 10px; }
+            .btn-search { width: 100%; margin-top: 10px; justify-content: center; }
+            .store-btns { flex-direction: column; }
+            .stats-bar .row > div { border-bottom: 1px solid var(--border-glass); padding: 20px 0; }
+            .stats-bar .row > div:last-child { border: none; }
+            .cta-btns-group { flex-direction: column; align-items: center; }
+            .btn-main, .btn-secondary-outline { width: 100%; max-width: 400px; justify-content: center; }
+        }
+
+                /* --- SECTION PARTENAIRES FUSIONNÉE --- */
+        .partners-section {
+            padding: 100px 0;
+            position: relative;
+            background-color: var(--bg-deep);
+            overflow: hidden;
+        }
+
+        #particles-js-partners {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .partners-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .partners-label {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+
+        .marquee-wrapper {
+            position: relative;
+            width: 100%;
+            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 40px;
+            animation: scroll-left 40s linear infinite;
+            width: max-content;
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .partner-card {
+            flex: 0 0 auto;
+            width: 240px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-green);
+        }
+
+        .partner-name { font-weight: 700; font-size: 1rem; margin-bottom: 5px; }
+        .partner-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; }
+        
+        /* --- FOOTER FINAL (PROPRE AU FICHIER 1.DOCX) --- */
+        .main-footer {
+            position: relative;
+            padding: 100px 0 40px;
+            background-color: #05141c; /* La couleur exacte de votre fichier */
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            color: #ffffff;
+        }
+
+        #particles-footer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .footer-content { position: relative; z-index: 10; }
+        .footer-logo { font-size: 1.6rem; font-weight: 800; display: flex; align-items: center; gap: 12px; margin-bottom: 25px; }
+        .logo-box { width: 32px; height: 32px; background: #10b981; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #000; }
+        .footer-desc { color: #94a3b8; font-size: 0.95rem; line-height: 1.7; margin-bottom: 30px; max-width: 350px; }
+
+        .network-status { display: inline-flex; align-items: center; padding: 10px 18px; background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 50px; font-size: 0.85rem; color: #10b981; }
+        .pulse-dot { width: 8px; height: 8px; background: #10b981; border-radius: 50%; margin-right: 12px; box-shadow: 0 0 12px #10b981; animation: pulse-green 2s infinite; }
+
+        @keyframes pulse-green {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+        }
+
+        .footer-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 30px; }
+        .footer-list { list-style: none; padding: 0; }
+        .footer-list li { margin-bottom: 15px; }
+        .footer-list a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+        .footer-list a:hover { color: #10b981; padding-left: 5px; }
+
+        .newsletter-form { position: relative; margin-top: 20px; }
+        .newsletter-input { width: 100%; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 15px 60px 15px 20px; border-radius: 12px; color: #fff; outline: none; }
+        .newsletter-btn { position: absolute; right: 6px; top: 6px; background: #10b981; border: none; width: 44px; height: 44px; border-radius: 10px; color: #000; display: flex; align-items: center; justify-content: center; }
+
+        .social-row { display: flex; gap: 15px; margin-top: 25px; }
+        .social-btn { width: 42px; height: 42px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #94a3b8; transition: 0.3s; text-decoration: none; }
+        .social-btn:hover { border-color: #10b981; color: #10b981; background: rgba(16, 185, 129, 0.08); }
+
+        .bottom-bar { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); color: #94a3b8; font-size: 0.9rem; }
+        .cert-icons { display: flex; gap: 25px; justify-content: flex-end; }
+        .cert-item { display: flex; align-items: center; gap: 8px; }
+        
+
+    </style>
+</head>
+<body>
+
+    <div id="firefly-box"></div>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Foncier<span>Chain</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="#hero">Plateforme</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#crise">Registre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#verification">Vérification</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#ecosysteme">Écosystème</a></li>
+                    </ul>
+                    <div class="d-flex">
+                        <a href="#" class="btn-portal-nav">Accéder au Portail</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-7 order-2 order-lg-1">
+                        <h1>Droits Immuables.<br><span style="color: var(--accent-green)">Sécurisons l'Avenir</span><br>Foncier du Congo.</h1>
+                        <p class="hero-desc">FoncierChain ancre chaque titre foncier dans un registre blockchain inviolable pour garantir la paix sociale.</p>
+                        <div class="d-flex flex-wrap gap-3 mb-5">
+                            <a href="#verification" class="btn-verify">Vérifier un Titre</a>
+                            <a href="#" class="btn-outline-custom">Consulter le Registre</a>
+                        </div>
+                        <div class="row g-4 mt-2 justify-content-center justify-content-lg-start">
+                            <div class="col-4 col-md-auto"><span class="stat-val">2,4M+</span><span class="stat-label-hero">Parcelles</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val" style="color: var(--accent-green)">99,9%</span><span class="stat-label-hero">Disponibilité</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val">0</span><span class="stat-label-hero">Fraude</span></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 order-1 order-lg-2 text-center">
+                        <div class="img-container mx-auto">
+                            <img src="Images/img1.png" class="main-img" alt="Propriétaire">
+                            <div class="floating-tag tag-status-verif d-flex align-items-center gap-2">
+                                <div style="width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);"></div>
+                                <div class="text-start"><span class="stat-label-hero">STATUS</span><div class="fw-bold" style="color: var(--accent-green); font-size: 0.7rem;">Vérifié</div></div>
+                            </div>
+                            <div class="floating-tag tag-asset-id"><span class="stat-label-hero">ASSET ID</span><div style="font-family: monospace; font-size: 0.6rem; color: var(--accent-green);">SHA-256 - a3f9b2...</div></div>
+                            <div class="floating-tag tag-parcelle-madibou"><span class="stat-label-hero">LOCALISATION</span><div class="small fw-bold">Madibou, Brazzaville</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="crise">
+            <div class="container text-center">
+                <span class="section-tag">LA CRISE QUE NOUS RÉSOLVONS</span>
+                <h2 class="section-title">Le Système Foncier Congolais est Brisé.</h2>
+                <p class="section-desc">Des décennies de registres papier ont engendré une crise de fraude et de corruption.</p>
+                <div class="row g-4 mb-5 pb-4 justify-content-center text-center">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="stat-card">
+                            <span style="font-size: 3rem; font-weight: 700; color: var(--accent-orange); display: block;">60%</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">des titres fonciers actuellement en litige actif</span>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="stat-card">
+                            <span style="font-size: 3rem; font-weight: 700; color: #fff; display: block;">7+</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">années de durée moyenne des litiges fonciers</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-5 justify-content-center">
+                    <div class="col-12 col-lg-5">
+                        <div class="content-card">
+                            <div class="crise-img-container"><div class="img-header-chaos" style="background-image: url('Images/img2.png');"></div><span class="floating-badge badge-old"> ⓘ L'ANCIEN SYSTÈME</span></div>
+                            <div class="card-body-crise"><h3 class="card-title-crise">Registres Papier.</h3><ul class="crise-list text-start">                                    <li class="chaos-item">Documents facilement falsifiés ou détruits</li>
+                                    <li class="chaos-item">Aucune autorité centrale de vérification</li>
+                                    <li class="chaos-item">Double attribution de la même parcelle</li>
+                                    <li class="chaos-item">Corruption à chaque niveau administratif</li>
+                                    <li class="chaos-item">Familles expulsées après des décennies de propriété</li></ul></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-5">
+                        <div class="content-card">
+                            <div class="crise-img-container"><div class="img-header-solution" style="background-image: url('Images/img3.png');"></div><span class="floating-badge badge-new"> 🛡️ RÉPONSE FONCIERCHAIN</span></div>
+                            <div class="card-body-crise"><h3 class="card-title-crise">Blockchain Immuable.</h3><ul class="crise-list text-start"><li class="solution-item">Empreinte cryptographique SHA-256 de chaque titre</li>
+                                    <li class="solution-item">Registre distribué inviolable</li>
+                                    <li class="solution-item">Vérification publique en temps réel pour tous les citoyens</li>
+                                    <li class="solution-item">Contrôles d'accès de niveau ministériel</li>
+                                    <li class="solution-item">Zéro possibilité de double attribution</li></ul>
+                            </div>
+                            <div class="fiche-parcelle">
+                                    <div class="fiche-header">
+                                        <span class="fiche-label">Fiche Parcelle</span>
+                                        <div class="d-flex align-items-center">
+                                            <span class="status-dot"></span>
+                                            <span class="status-text">Confirmé</span>
+                                        </div>
+                                    </div>
+                                    <span class="parcelle-id">#Madibou-482</span>
+                                    <div class="fiche-info">
+                                        Propriétaire : <strong>Jean-Baptiste Moukala</strong> · Notarié : <strong>Ministère des Affaires Foncières</strong><br>
+                                        Horodatage : <strong>03/11/2024</strong> · Bloc <strong>#1 204 882</strong>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="verification">
+            <div class="container text-center">
+                <span class="section-tag">MOTEUR DE VÉRIFICATION</span>
+                <h2 class="section-title">Recherchez N'importe Quel Titre<br>Instantanément.</h2>
+                <p class="section-desc">Interrogez le registre immuable avec un numéro de parcelle ou un hash. Chaque résultat est vérifié cryptographiquement.</p>
+                <div class="search-bar-container">
+                    <div class="search-input-wrapper">
+                        <span class="search-prefix">>_</span>
+                        <input type="text" class="search-input" placeholder="Entrez un Numéro de Parcelle ou un Hash SHA-256...">
+                        <button class="btn-search">Interroger le Registre</button>
+                    </div>
+                    <div class="suggestions">
+                        <span>Essayez :</span>
+                        <span class="chip">#Madibou-482</span>
+                        <span class="chip">#Brazzaville-001</span>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div style="width: 44px; height: 44px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div>
+                            <h3 class="m-0 fw-bold fs-4">#Madibou-482</h3>
+                            <div style="color: var(--text-muted); font-size: 0.8rem;">Propriétaire Légitime Confirmé.</div>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-box"><span class="stat-label-hero">PROPRIÉTAIRE</span><div class="fw-bold">Jean-Baptiste Moukala</div></div>
+                        <div class="info-box"><span class="stat-label-hero">NOTARIÉ PAR</span><div class="fw-bold">Ministère des Affaires Foncières</div></div>
+                        <div class="info-box"><span class="stat-label-hero">NUMÉRO DE BLOC</span><div class="fw-bold">#1 204 882</div></div>
+                        <div class="info-box"><span class="stat-label-hero">HORODATAGE</span><div class="fw-bold">03/11/2024 - 14:32 UTC</div></div>
+                    </div>
+                    <div class="hash-box">
+                        <span class="stat-label-hero">HASH SHA-256</span>
+                        <div class="hash-value">a3f9b2cfd4e6f6a7b8c0df2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1</div>
+                    </div>
+                    <span class="status-tag">Vérifié Blockchain</span>
+                    <span class="status-tag">Sans Litige</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="ecosysteme">
+            <div class="container text-center">
+                <span class="section-tag">L'ÉCOSYSTÈME</span>
+                <h2 class="section-title">Une Plateforme. Trois Piliers.</h2>
+                <p class="section-desc">FoncierChain sert chaque partie prenante — des ministères gouvernementaux aux citoyens individuels — à travers un écosystème unifié.</p>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="pillar-card">
+                            <img src="Images/img4.png" alt="Portail Institutionnel" class="pillar-img">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                                <span class="pillar-tag">Agents Fonciers</span>
+                            </div>
+                            <h3 class="pillar-title">Portail Institutionnel</h3>
+                            <p class="pillar-text">Accès sécurisé pour les agents, notaires et fonctionnaires. Enregistrez des parcelles et auditez la chaîne de custody.</p>
+                            <ul class="feature-list">
+                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Auth multi-facteurs</li>
+                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Piste d'audit complète</li>
+                            </ul>
+                            <a href="#" class="btn-pillar">Accéder au Portail</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="pillar-card">
+                            <img src="Images/img5.png" alt="Registre Public" class="pillar-img">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                                <span class="pillar-tag">Citoyens</span>
+                            </div>
+                            <h3 class="pillar-title">Registre Public</h3>
+                            <p class="pillar-text">Ouvert et transparent. Chaque citoyen peut vérifier n'importe quel titre foncier en quelques secondes.</p>
+                            <div class="mt-4"><span class="mini-badge">Accès Libre</span><span class="mini-badge">Temps Réel</span></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="pillar-card">
+                            <img src="Images/img6.png" alt="Application Mobile" class="pillar-img">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+                                <span class="pillar-tag">Mobilité</span>
+                            </div>
+                            <h3 class="pillar-title">Application Mobile</h3>
+                            <p class="pillar-text">Scannez un QR code depuis n'importe où au Congo — même hors ligne.</p>
+                            <div class="mobile-preview">
+                                <div style="background:rgba(255,255,255,0.05); border-radius: 8px; padding: 15px;">
+                                    <div style="width: 25px; height: 25px; background:var(--accent-green); border-radius:50%; margin: 0 auto 10px; display:flex; align-items:center; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                                    <div style="font-size: 0.6rem; color: var(--accent-green); font-weight:700;">VÉRIFIÉ</div>
+                                </div>
+                            </div>
+                             <div class="store-btns">
+                        <a href="#" class="btn-store">
+                            <img src="Images/apple-logo.svg" alt="applestore" style="width: 22px;">
+                            <div class="store-text-box">
+                                <span class="store-sub">Télécharger sur</span>
+                                <span class="store-main">App Store</span>
+                            </div>
+                        </a>
+                        <a href="#" class="btn-store">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play" style="width: 22px;">
+                            <div class="store-text-box">
+                                <span class="store-sub">Disponible sur</span>
+                                <span class="store-main">Google Play</span>
+                            </div>
+                        </a>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-bar">
+                    <div class="row align-items-center">
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></div><span class="stat-val" style="font-size: 1.5rem;">2,4M+</span><span class="stat-label-footer">Parcelles</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle></svg></div><span class="stat-val" style="font-size: 1.5rem;">180K+</span><span class="stat-label-footer">Vérifiés</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path></svg></div><span class="stat-val" style="font-size: 1.5rem;">12</span><span class="stat-label-footer">Ministères</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div><span class="stat-val" style="font-size: 1.5rem;"> < 3s</span><span class="stat-label-footer">Vitesse</span></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-transition">
+            <div id="particles-js"></div>
+            <div class="container text-center cta-content">
+                <div class="section-tag mb-3">Sécurisez votre héritage</div>
+                <h2 class="cta-title">Enregistrez Votre Terre. <br><span class="text-accent">Protégez Votre Avenir.</span></h2>
+                <p class="cta-desc">Rejoignez plus de 180 000 propriétaires congolais qui ont sécurisé leurs droits fonciers sur la blockchain. Cela prend moins de 5 minutes.</p>
+                <div class="cta-btns-group">
+                    <a href="#" class="btn-main">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        Commencer l'Enregistrement
+                    </a>
+                    <a href="#" class="btn-secondary-outline">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        Télécharger le Livre Blanc
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="partners-section">
+            <div id="particles-js-partners"></div>
+            <div class="partners-content container">
+                <h6 class="partners-label">Partenaires Institutionnels & Validateurs</h6>
+                <div class="marquee-wrapper">
+                    <div class="marquee-content">
+                        
+                        <div class="partner-card">
+                            <div class="logo-placeholder">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11"></path></svg>
+                            </div>
+                            <div class="partner-name">MinFoncier</div>
+                            <div class="partner-desc">Ministère des Affaires Foncières</div>
+                        </div>
+
+                        <div class="partner-card">
+                            <div class="logo-placeholder">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            <div class="partner-name">UN-Habitat</div>
+                            <div class="partner-desc">Nations Unies Habitat</div>
+                        </div>
+
+                        <div class="partner-card">
+                            <div class="logo-placeholder">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                            </div>
+                            <div class="partner-name">BAD</div>
+                            <div class="partner-desc">Banque Africaine de Développement</div>
+                        </div>
+
+                        <div class="partner-card">
+                            <div class="logo-placeholder">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                            </div>
+                            <div class="partner-name">BCC</div>
+                            <div class="partner-desc">Banque Centrale du Congo</div>
+                        </div>
+
+                        <div class="partner-card">
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11"></path></svg></div>
+                            <div class="partner-name">MinFoncier</div>
+                        </div>
+                        <div class="partner-card">
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div>
+                            <div class="partner-name">UN-Habitat</div>
+                        </div>
+                        <div class="partner-card">
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg></div>
+                            <div class="partner-name">BAD</div>
+                        </div>
+                        <div class="partner-card">
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"></rect></svg></div>
+                            <div class="partner-name">BCC</div>
+                        </div>
+
+                    </div>
+                </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div id="particles-footer"></div>
+        <div class="container footer-content">
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    <div class="footer-logo">
+                        <div class="logo-box"><i class="fas fa-shield-halved"></i></div>
+                        Foncier<span>Chain</span>
+                    </div>
+                    <p class="footer-desc">Sécuriser l'avenir foncier du Congo grâce à la technologie blockchain immuable. Chaque titre. Chaque citoyen. Pour toujours.</p>
+                    <div class="network-status"><span class="pulse-dot"></span> Réseau Principal Opérationnel</div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <h5 class="footer-title">Plateforme</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Portail Institutionnel</a></li>
+                        <li><a href="#">Registre Public</a></li>
+                        <li><a href="#">Vérification</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <h5 class="footer-title">Ressources</h5>
+                    <ul class="footer-list">
+                        <li><a href="#">Livre Blanc</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <h5 class="footer-title">Restez Informé</h5>
+                    <div class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="votre@email.com">
+                        <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="social-row">
+                        <a href="#" class="social-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-telegram-plane"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row bottom-bar">
+                <div class="col-md-6">© 2026 FoncierChain. République du Congo.</div>
+                <div class="col-md-6 text-end">
+                    <div class="cert-icons">
+                        <div class="cert-item"><i class="fas fa-lock" style="color:#10b981"></i> Chiffrement 256 bits</div>
+                        <div class="cert-item"><i class="fas fa-certificate" style="color:#10b981"></i> ISO 27001</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Lucioles
+        const box = document.getElementById('firefly-box');
+        for (let i = 0; i < 60; i++) {
+            const f = document.createElement('div');
+            f.className = 'firefly';
+            f.style.left = Math.random() * 100 + '%';
+            f.style.top = Math.random() * 100 + '%';
+            f.style.setProperty('--move-x', (Math.random() * 400 - 200) + 'px');
+            f.style.setProperty('--move-y', (Math.random() * 400 - 200) + 'px');
+            f.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            f.style.animationDelay = (Math.random() * 5) + 's';
+            box.appendChild(f);
+        }
+
+        // Particules CTA
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#10b981" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "out_mode": "out" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "bubble" } },
+                "modes": { "bubble": { "distance": 200, "size": 5, "duration": 2, "opacity": 0.8 } }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>

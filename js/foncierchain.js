@@ -28,3 +28,39 @@
             },
             "retina_detect": true
         });
+
+        const scrollRevealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Lazy load images and background images only once
+                if (entry.isIntersecting) {
+                    const lazyImage = entry.target.querySelector('[data-src]');
+                    if (lazyImage && lazyImage.dataset.src) {
+                        lazyImage.src = lazyImage.dataset.src;
+                        lazyImage.removeAttribute('data-src');
+                    }
+                    const lazyBgImage = entry.target.querySelector('[data-bg-src]');
+                    if (lazyBgImage && lazyBgImage.dataset.bgSrc) {
+                        lazyBgImage.style.backgroundImage = `url(${lazyBgImage.dataset.bgSrc})`;
+                        lazyBgImage.removeAttribute('data-bg-src');
+                    }
+                }
+
+                // Toggle animation class
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        // Apply stagger effect and observe elements
+        document.querySelectorAll('[data-scroll-reveal]').forEach(element => {
+            const staggerContainer = element.closest('[data-stagger]');
+            if (staggerContainer) {
+                const index = Array.from(element.parentElement.children).indexOf(element);
+                const delay = index * 100; // 100ms delay between staggered items
+                element.style.transitionDelay = `${delay}ms`;
+            }
+            scrollRevealObserver.observe(element);
+        });

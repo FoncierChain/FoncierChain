@@ -318,3 +318,21 @@
         .bottom-bar { margin-top: 80px; padding-top: 30px; border-top: 1px solid rgba(255, 255, 255, 0.08); color: #94a3b8; font-size: 0.9rem; }
         .cert-icons { display: flex; gap: 25px; justify-content: flex-end; }
         .cert-item { display: flex; align-items: center; gap: 8px; }
+
+        [data-scroll-reveal] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        [data-scroll-reveal="left"] { transform: translateX(-30px); }
+        [data-scroll-reveal="right"] { transform: translateX(30px); }
+
+        [data-scroll-reveal].is-visible {
+            opacity: 1;
+            transform: translateY(0) translateX(0);
+        }
+
+        [data-stagger] > * {
+            transition-delay: var(--stagger-delay, 0s);
+        }

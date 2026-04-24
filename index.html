@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FoncierChain | Registre Foncier Blockchain</title>
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/foncierchain.css">
-    
+
 </head>
+
 <body>
 
     <div id="firefly-box"></div>
@@ -31,12 +34,14 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a class="nav-link" href="#hero">Plateforme</a></li>
-                        <li class="nav-item"><a class="nav-link" href="carte.html">Registre public</a></li>
+                        <li class="nav-item"><a class="nav-link" href="carte.html">Carte</a></li>
                         <li class="nav-item"><a class="nav-link" href="portail_public.html">Vérification</a></li>
                         <li class="nav-item"><a class="nav-link" href="#ecosysteme">Écosystème</a></li>
                     </ul>
                     <div class="d-flex align-items-center gap-3">
-                        <button id="theme-toggle" class="btn p-0" style="color: var(--text-muted); font-size: 1.2rem; background: none; border: none;" title="Basculer le thème">
+                        <button id="theme-toggle" class="btn p-0"
+                            style="color: var(--text-muted); font-size: 1.2rem; background: none; border: none;"
+                            title="Basculer le thème">
                             <i class="fas fa-sun"></i>
                         </button>
                         <a href="#" class="btn-portal-nav">Accéder au Portail</a>
@@ -51,27 +56,47 @@
             <div class="container">
                 <div class="row align-items-center g-5">
                     <div class="col-lg-7 order-2 order-lg-1" data-stagger>
-                        <h1 data-scroll-reveal="left">Droits Immuables.<br><span style="color: var(--accent-green)">Sécurisons l'Avenir</span><br>Foncier du Congo.</h1>
-                        <p class="hero-desc" data-scroll-reveal="left">FoncierChain ancre chaque titre foncier dans un registre blockchain inviolable pour garantir la paix sociale.</p>
+                        <h1 data-scroll-reveal="left">Droits Immuables.<br><span
+                                style="color: var(--accent-green)">Sécurisons l'Avenir</span><br>Foncier du Congo.</h1>
+                        <p class="hero-desc" data-scroll-reveal="left">FoncierChain ancre chaque titre foncier dans un
+                            registre blockchain inviolable pour garantir la paix sociale.</p>
                         <div class="d-flex flex-wrap gap-3 mb-5" data-scroll-reveal="left">
                             <a href="#verification" class="btn-verify">Vérifier un Titre</a>
                             <a href="#" class="btn-outline-custom">Consulter le Registre</a>
                         </div>
-                        <div class="row g-4 mt-2 justify-content-center justify-content-lg-start" data-scroll-reveal="left">
-                            <div class="col-4 col-md-auto"><span class="stat-val counter-animate" data-count="2.4" data-suffix="M+">0</span><span class="stat-label-hero">Parcelles</span></div>
-                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val counter-animate" data-count="99.9" data-suffix="%" style="color: var(--accent-green)">0</span><span class="stat-label-hero">Disponibilité</span></div>
-                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val counter-animate" data-count="0">0</span><span class="stat-label-hero">Fraude</span></div>
+                        <div class="row g-4 mt-2 justify-content-center justify-content-lg-start"
+                            data-scroll-reveal="left">
+                            <div class="col-4 col-md-auto"><span class="stat-val counter-animate" data-count="2.4"
+                                    data-suffix="M+">0</span><span class="stat-label-hero">Parcelles</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span
+                                    class="stat-val counter-animate" data-count="99.9" data-suffix="%"
+                                    style="color: var(--accent-green)">0</span><span
+                                    class="stat-label-hero">Disponibilité</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span
+                                    class="stat-val counter-animate" data-count="0">0</span><span
+                                    class="stat-label-hero">Fraude</span></div>
                         </div>
                     </div>
                     <div class="col-lg-5 order-1 order-lg-2 text-center" data-scroll-reveal="right">
                         <div class="img-container mx-auto">
-                            <img data-src="Images/img1.png" class="main-img" alt="Propriétaire">
+                            <img data-src="Images/img1.webp" class="main-img" alt="Propriétaire">
                             <div class="floating-tag tag-status-verif d-flex align-items-center gap-2">
-                                <div style="width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);"></div>
-                                <div class="text-start"><span class="stat-label-hero">STATUS</span><div class="fw-bold" style="color: var(--accent-green); font-size: 0.7rem;">Vérifié</div></div>
+                                <div
+                                    style="width: 6px; height: 6px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green);">
+                                </div>
+                                <div class="text-start"><span class="stat-label-hero">STATUS</span>
+                                    <div class="fw-bold" style="color: var(--accent-green); font-size: 0.7rem;">Vérifié
+                                    </div>
+                                </div>
                             </div>
-                            <div class="floating-tag tag-asset-id"><span class="stat-label-hero">ASSET ID</span><div style="font-family: monospace; font-size: 0.6rem; color: var(--accent-green);">SHA-256 - a3f9b2...</div></div>
-                            <div class="floating-tag tag-parcelle-madibou"><span class="stat-label-hero">LOCALISATION</span><div class="small fw-bold">Madibou, Brazzaville</div></div>
+                            <div class="floating-tag tag-asset-id"><span class="stat-label-hero">ASSET ID</span>
+                                <div style="font-family: monospace; font-size: 0.6rem; color: var(--accent-green);">
+                                    SHA-256 - a3f9b2...</div>
+                            </div>
+                            <div class="floating-tag tag-parcelle-madibou"><span
+                                    class="stat-label-hero">LOCALISATION</span>
+                                <div class="small fw-bold">Madibou, Brazzaville</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,26 +107,62 @@
         <section class="trust-bar-section border-y py-4">
             <div class="marquee-wrapper">
                 <div class="marquee-content trust-marquee">
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span></div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span>
+                    </div>
 
                     <!-- duplicate for seamless loop -->
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span></div>
-                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span></div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span>
+                    </div>
+                    <div class="trust-item">
+                        <div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -110,54 +171,76 @@
             <div class="container text-center">
                 <span class="section-tag">LA CRISE QUE NOUS RÉSOLVONS</span>
                 <h2 class="section-title">Le Système Foncier Congolais est Brisé.</h2>
-                <p class="section-desc">Des décennies de registres papier ont engendré une crise de fraude et de corruption.</p>
+                <p class="section-desc">Des décennies de registres papier ont engendré une crise de fraude et de
+                    corruption.</p>
                 <div class="row g-4 mb-5 pb-4 justify-content-center text-center" data-stagger>
                     <div class="col-6 col-md-4 col-lg-3" data-scroll-reveal>
                         <div class="stat-card">
-                            <span class="counter-animate" data-count="60" data-suffix="%" style="font-size: 3rem; font-weight: 700; color: var(--accent-orange); display: block;">0</span>
-                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">des titres fonciers actuellement en litige actif</span>
+                            <span class="counter-animate" data-count="60" data-suffix="%"
+                                style="font-size: 3rem; font-weight: 700; color: var(--accent-orange); display: block;">0</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">des titres
+                                fonciers actuellement en litige actif</span>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-3" data-scroll-reveal>
                         <div class="stat-card">
-                            <span class="counter-animate" data-count="7" data-suffix="+" style="font-size: 3rem; font-weight: 700; color: var(--text-main, #fff); display: block;">0</span>
-                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">années de durée moyenne des litiges fonciers</span>
+                            <span class="counter-animate" data-count="7" data-suffix="+"
+                                style="font-size: 3rem; font-weight: 700; color: var(--text-main, #fff); display: block;">0</span>
+                            <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">années de durée
+                                moyenne des litiges fonciers</span>
                         </div>
                     </div>
                 </div>
                 <div class="row g-5 justify-content-center" data-stagger>
                     <div class="col-12 col-lg-5" data-scroll-reveal>
                         <div class="content-card">
-                            <div class="crise-img-container"><div class="img-header-chaos" data-bg-src="Images/img2.png"></div><span class="floating-badge badge-old">L'ANCIEN SYSTÈME</span></div>
-                            <div class="card-body-crise"><h3 class="card-title-crise">Registres Papier.</h3><ul class="crise-list text-start">                                    <li class="chaos-item">Documents facilement falsifiés ou détruits</li>
+                            <div class="crise-img-container">
+                                <div class="img-header-chaos" data-bg-src="Images/img2.webp"></div><span
+                                    class="floating-badge badge-old">L'ANCIEN SYSTÈME</span>
+                            </div>
+                            <div class="card-body-crise">
+                                <h3 class="card-title-crise">Registres Papier.</h3>
+                                <ul class="crise-list text-start">
+                                    <li class="chaos-item">Documents facilement falsifiés ou détruits</li>
                                     <li class="chaos-item">Aucune autorité centrale de vérification</li>
                                     <li class="chaos-item">Double attribution de la même parcelle</li>
                                     <li class="chaos-item">Corruption à chaque niveau administratif</li>
-                                    <li class="chaos-item">Familles expulsées après des décennies de propriété</li></ul></div>
+                                    <li class="chaos-item">Familles expulsées après des décennies de propriété</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-lg-5" data-scroll-reveal>
                         <div class="content-card">
-                            <div class="crise-img-container"><div class="img-header-solution" data-bg-src="Images/img3.png"></div><span class="floating-badge badge-new">RÉPONSE FONCIERCHAIN</span></div>
-                            <div class="card-body-crise"><h3 class="card-title-crise">Blockchain Immuable.</h3><ul class="crise-list text-start"><li class="solution-item">Empreinte cryptographique SHA-256 de chaque titre</li>
+                            <div class="crise-img-container">
+                                <div class="img-header-solution" data-bg-src="Images/img3.webp"></div><span
+                                    class="floating-badge badge-new">RÉPONSE FONCIERCHAIN</span>
+                            </div>
+                            <div class="card-body-crise">
+                                <h3 class="card-title-crise">Blockchain Immuable.</h3>
+                                <ul class="crise-list text-start">
+                                    <li class="solution-item">Empreinte cryptographique SHA-256 de chaque titre</li>
                                     <li class="solution-item">Registre distribué inviolable</li>
-                                    <li class="solution-item">Vérification publique en temps réel pour tous les citoyens</li>
+                                    <li class="solution-item">Vérification publique en temps réel pour tous les citoyens
+                                    </li>
                                     <li class="solution-item">Contrôles d'accès de niveau ministériel</li>
-                                    <li class="solution-item">Zéro possibilité de double attribution</li></ul>
+                                    <li class="solution-item">Zéro possibilité de double attribution</li>
+                                </ul>
                             </div>
                             <div class="fiche-parcelle">
-                                    <div class="fiche-header">
-                                        <span class="fiche-label">Fiche Parcelle</span>
-                                        <div class="d-flex align-items-center">
-                                            <span class="status-dot"></span>
-                                            <span class="status-text">Confirmé</span>
-                                        </div>
+                                <div class="fiche-header">
+                                    <span class="fiche-label">Fiche Parcelle</span>
+                                    <div class="d-flex align-items-center">
+                                        <span class="status-dot"></span>
+                                        <span class="status-text">Confirmé</span>
                                     </div>
-                                    <span class="parcelle-id">#Madibou-482</span>
-                                    <div class="fiche-info">
-                                        Propriétaire : <strong>Jean-Baptiste Moukala</strong> · Notarié : <strong>Ministère des Affaires Foncières</strong><br>
-                                        Horodatage : <strong>03/11/2024</strong> · Bloc <strong>#1 204 882</strong>
-                                    </div>
+                                </div>
+                                <span class="parcelle-id">#Madibou-482</span>
+                                <div class="fiche-info">
+                                    Propriétaire : <strong>Jean-Baptiste Moukala</strong> · Notarié : <strong>Ministère
+                                        des Affaires Foncières</strong><br>
+                                    Horodatage : <strong>03/11/2024</strong> · Bloc <strong>#1 204 882</strong>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -169,11 +252,13 @@
             <div class="container text-center">
                 <span class="section-tag">MOTEUR DE VÉRIFICATION</span>
                 <h2 class="section-title">Recherchez N'importe Quel Titre<br>Instantanément.</h2>
-                <p class="section-desc">Interrogez le registre immuable avec un numéro de parcelle ou un hash. Chaque résultat est vérifié cryptographiquement.</p>
+                <p class="section-desc">Interrogez le registre immuable avec un numéro de parcelle ou un hash. Chaque
+                    résultat est vérifié cryptographiquement.</p>
                 <div class="search-bar-container">
                     <div class="search-input-wrapper">
                         <span class="search-prefix">>_</span>
-                        <input type="text" id="search-input-field" class="search-input" placeholder="Entrez un Numéro de Parcelle ou un Hash SHA-256...">
+                        <input type="text" id="search-input-field" class="search-input"
+                            placeholder="Entrez un Numéro de Parcelle ou un Hash SHA-256...">
                         <button id="btn-search-simulate" class="btn-search">Interroger le Registre</button>
                     </div>
                     <div class="suggestions">
@@ -181,26 +266,42 @@
                         <span class="chip suggestion-chip">#Madibou-482</span>
                         <span class="chip suggestion-chip">#Brazzaville-001</span>
                     </div>
-                    <div id="search-loading" style="display: none; align-items: center; justify-content: center; gap: 15px; margin-top: 30px;">
-                        <div class="spinner-border" style="color: var(--accent-green); width: 1.5rem; height: 1.5rem;" role="status"></div>
-                        <span style="color: var(--accent-green); font-weight: 600;">Interrogation du noeud réseau en cours...</span>
+                    <div id="search-loading"
+                        style="display: none; align-items: center; justify-content: center; gap: 15px; margin-top: 30px;">
+                        <div class="spinner-border" style="color: var(--accent-green); width: 1.5rem; height: 1.5rem;"
+                            role="status"></div>
+                        <span style="color: var(--accent-green); font-weight: 600;">Interrogation du noeud réseau en
+                            cours...</span>
                     </div>
                 </div>
                 <div id="search-result-card" class="result-card" style="display: none; opacity: 1; transform: none;">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <div style="width: 44px; height: 44px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green);">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        <div
+                            style="width: 44px; height: 44px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
                         </div>
                         <div>
                             <h3 id="result-title" class="m-0 fw-bold fs-4">#Madibou-482</h3>
-                            <div style="color: var(--text-muted); font-size: 0.8rem;">Propriétaire Légitime Confirmé.</div>
+                            <div style="color: var(--text-muted); font-size: 0.8rem;">Propriétaire Légitime Confirmé.
+                            </div>
                         </div>
                     </div>
                     <div class="info-grid">
-                        <div class="info-box"><span class="stat-label-hero">PROPRIÉTAIRE</span><div class="fw-bold">Jean-Baptiste Moukala</div></div>
-                        <div class="info-box"><span class="stat-label-hero">NOTARIÉ PAR</span><div class="fw-bold">Ministère des Affaires Foncières</div></div>
-                        <div class="info-box"><span class="stat-label-hero">NUMÉRO DE BLOC</span><div class="fw-bold">#1 204 882</div></div>
-                        <div class="info-box"><span class="stat-label-hero">HORODATAGE</span><div class="fw-bold">03/11/2024 - 14:32 UTC</div></div>
+                        <div class="info-box"><span class="stat-label-hero">PROPRIÉTAIRE</span>
+                            <div class="fw-bold">Jean-Baptiste Moukala</div>
+                        </div>
+                        <div class="info-box"><span class="stat-label-hero">NOTARIÉ PAR</span>
+                            <div class="fw-bold">Ministère des Affaires Foncières</div>
+                        </div>
+                        <div class="info-box"><span class="stat-label-hero">NUMÉRO DE BLOC</span>
+                            <div class="fw-bold">#1 204 882</div>
+                        </div>
+                        <div class="info-box"><span class="stat-label-hero">HORODATAGE</span>
+                            <div class="fw-bold">03/11/2024 - 14:32 UTC</div>
+                        </div>
                     </div>
                     <div class="hash-box">
                         <span class="stat-label-hero">HASH SHA-256</span>
@@ -216,77 +317,140 @@
             <div class="container text-center">
                 <span class="section-tag">L'ÉCOSYSTÈME</span>
                 <h2 class="section-title">Une Plateforme. Trois Piliers.</h2>
-                <p class="section-desc">FoncierChain sert chaque partie prenante, des ministères gouvernementaux aux citoyens individuels à travers un écosystème unifié.</p>
+                <p class="section-desc">FoncierChain sert chaque partie prenante, des ministères gouvernementaux aux
+                    citoyens individuels à travers un écosystème unifié.</p>
                 <div class="row g-4" data-stagger>
                     <div class="col-lg-4" data-scroll-reveal>
                         <div class="pillar-card">
-                            <img data-src="Images/img4.png" alt="Portail Institutionnel" class="pillar-img">
+                            <img data-src="Images/img4.webp" alt="Portail Institutionnel" class="pillar-img">
                             <div class="d-flex align-items-center mb-4">
-                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg></div>
                                 <span class="pillar-tag">Agents Fonciers</span>
                             </div>
                             <h3 class="pillar-title">Portail Institutionnel</h3>
-                            <p class="pillar-text">Accès sécurisé pour les agents, notaires et fonctionnaires. Enregistrez des parcelles et auditez la chaîne de custody.</p>
+                            <p class="pillar-text">Accès sécurisé pour les agents, notaires et fonctionnaires.
+                                Enregistrez des parcelles et auditez la chaîne de custody.</p>
                             <ul class="feature-list">
-                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Auth multi-facteurs</li>
-                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg> Piste d'audit complète</li>
+                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                        stroke="var(--accent-green)" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg> Auth multi-facteurs</li>
+                                <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                        stroke="var(--accent-green)" stroke-width="3">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg> Piste d'audit complète</li>
                             </ul>
                             <a href="#" class="btn-pillar">Accéder au Portail</a>
                         </div>
                     </div>
                     <div class="col-lg-4" data-scroll-reveal>
                         <div class="pillar-card">
-                            <img data-src="Images/img5.png" alt="Registre Public" class="pillar-img">
+                            <img data-src="Images/img5.webp" alt="Registre Public" class="pillar-img">
                             <div class="d-flex align-items-center mb-4">
-                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                    </svg></div>
                                 <span class="pillar-tag">Citoyens</span>
                             </div>
                             <h3 class="pillar-title">Registre Public</h3>
-                            <p class="pillar-text">Ouvert et transparent. Chaque citoyen peut vérifier n'importe quel titre foncier en quelques secondes.</p>
-                            <div class="mt-4"><span class="mini-badge">Accès Libre</span><span class="mini-badge">Temps Réel</span></div>
-                            <a href="carte.html" class="btn-pillar">Accéder au registre public</a>
+                            <p class="pillar-text">Ouvert et transparent. Chaque citoyen peut vérifier n'importe quel
+                                titre foncier en quelques secondes.</p>
+                            <div class="mt-4"><span class="mini-badge">Accès Libre</span><span class="mini-badge">Temps
+                                    Réel</span></div>
+                            <a href="#" class="btn-pillar">Accéder au registre public</a>
                         </div>
                     </div>
                     <div class="col-lg-4" data-scroll-reveal>
                         <div class="pillar-card">
-                            <img data-src="Images/img6.png" alt="Application Mobile" class="pillar-img">
+                            <img data-src="Images/img6.webp" alt="Application Mobile" class="pillar-img">
                             <div class="d-flex align-items-center mb-4">
-                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg></div>
+                                <div class="pillar-icon-box"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2">
+                                        <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                        <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                    </svg></div>
                                 <span class="pillar-tag">Mobilité</span>
                             </div>
                             <h3 class="pillar-title">Application Mobile</h3>
                             <p class="pillar-text">Scannez un QR code depuis n'importe où au Congo même hors ligne.</p>
                             <div class="mobile-preview">
                                 <div style="background:rgba(255,255,255,0.05); border-radius: 8px; padding: 15px;">
-                                    <div style="width: 25px; height: 25px; background:var(--accent-green); border-radius:50%; margin: 0 auto 10px; display:flex; align-items:center; justify-content:center;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="4"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                                    <div style="font-size: 0.6rem; color: var(--accent-green); font-weight:700;">VÉRIFIÉ</div>
+                                    <div
+                                        style="width: 25px; height: 25px; background:var(--accent-green); border-radius:50%; margin: 0 auto 10px; display:flex; align-items:center; justify-content:center;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000"
+                                            stroke-width="4">
+                                            <polyline points="20 6 9 17 4 12"></polyline>
+                                        </svg>
+                                    </div>
+                                    <div style="font-size: 0.6rem; color: var(--accent-green); font-weight:700;">VÉRIFIÉ
+                                    </div>
                                 </div>
                             </div>
-                             <div class="store-btns">
-                        <a href="#" class="btn-store">
-                            <img src="Images/apple-logo.svg" alt="applestore" style="width: 22px;">
-                            <div class="store-text-box">
-                                <span class="store-sub">Télécharger sur</span>
-                                <span class="store-main">App Store</span>
+                            <div class="store-btns">
+                                <a href="#" class="btn-store">
+                                    <img src="Images/apple-logo.svg" alt="applestore" style="width: 22px;">
+                                    <div class="store-text-box">
+                                        <span class="store-sub">Télécharger sur</span>
+                                        <span class="store-main">App Store</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="btn-store">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg"
+                                        alt="Google Play" style="width: 22px;">
+                                    <div class="store-text-box">
+                                        <span class="store-sub">Disponible sur</span>
+                                        <span class="store-main">Google Play</span>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                        <a href="#" class="btn-store">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/Google_Play_Arrow_logo.svg" alt="Google Play" style="width: 22px;">
-                            <div class="store-text-box">
-                                <span class="store-sub">Disponible sur</span>
-                                <span class="store-main">Google Play</span>
-                            </div>
-                        </a>
-                    </div>
                         </div>
                     </div>
                 </div>
                 <div class="stats-bar" data-scroll-reveal>
                     <div class="row align-items-center">
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></div><span class="stat-val counter-animate" data-count="2.4" data-suffix="M+" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Parcelles</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle></svg></div><span class="stat-val counter-animate" data-count="180" data-suffix="K+" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Vérifiés</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path></svg></div><span class="stat-val counter-animate" data-count="12" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Ministères</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div><span class="stat-val counter-animate" data-count="3" data-prefix="< " data-suffix="s" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Vitesse</span></div></div>
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-item">
+                                <div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    </svg></div><span class="stat-val counter-animate" data-count="2.4" data-suffix="M+"
+                                    style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Parcelles</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-item">
+                                <div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg></div><span class="stat-val counter-animate" data-count="180" data-suffix="K+"
+                                    style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Vérifiés</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-item">
+                                <div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 21h18"></path>
+                                    </svg></div><span class="stat-val counter-animate" data-count="12"
+                                    style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Ministères</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="stat-item">
+                                <div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                    </svg></div><span class="stat-val counter-animate" data-count="3" data-prefix="< "
+                                    data-suffix="s" style="font-size: 1.5rem;">0</span><span
+                                    class="stat-label-footer">Vitesse</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -296,15 +460,26 @@
             <div id="particles-js"></div>
             <div class="container text-center cta-content">
                 <div class="section-tag mb-3">Sécurisez votre héritage</div>
-                <h2 class="cta-title">Enregistrez Votre Terre. <br><span class="text-accent">Protégez Votre Avenir.</span></h2>
-                <p class="cta-desc">Rejoignez plus de 180 000 propriétaires congolais qui ont sécurisé leurs droits fonciers sur la blockchain. Cela prend moins de 5 minutes.</p>
+                <h2 class="cta-title">Enregistrez Votre Terre. <br><span class="text-accent">Protégez Votre
+                        Avenir.</span></h2>
+                <p class="cta-desc">Rejoignez plus de 180 000 propriétaires congolais qui ont sécurisé leurs droits
+                    fonciers sur la blockchain. Cela prend moins de 5 minutes.</p>
                 <div class="cta-btns-group">
                     <a href="#" class="btn-main">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
                         Commencer l'Enregistrement
                     </a>
                     <a href="#" class="btn-secondary-outline">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
                         Télécharger le Livre Blanc
                     </a>
                 </div>
@@ -316,10 +491,14 @@
                 <h6 class="partners-label">Partenaires Institutionnels & Validateurs</h6>
                 <div class="marquee-wrapper">
                     <div class="marquee-content" data-stagger>
-                        
+
                         <div class="partner-card" data-scroll-reveal>
                             <div class="logo-placeholder">
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11"></path></svg>
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11">
+                                    </path>
+                                </svg>
                             </div>
                             <div class="partner-name">MinFoncier</div>
                             <div class="partner-desc">Ministère des Affaires Foncières</div>
@@ -327,7 +506,13 @@
 
                         <div class="partner-card" data-scroll-reveal>
                             <div class="logo-placeholder">
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path
+                                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                    </path>
+                                </svg>
                             </div>
                             <div class="partner-name">UN-Habitat</div>
                             <div class="partner-desc">Nations Unies Habitat</div>
@@ -335,7 +520,9 @@
 
                         <div class="partner-card" data-scroll-reveal>
                             <div class="logo-placeholder">
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                                </svg>
                             </div>
                             <div class="partner-name">BAD</div>
                             <div class="partner-desc">Banque Africaine de Développement</div>
@@ -343,32 +530,48 @@
 
                         <div class="partner-card" data-scroll-reveal>
                             <div class="logo-placeholder">
-                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                </svg>
                             </div>
                             <div class="partner-name">BCC</div>
                             <div class="partner-desc">Banque Centrale du Congo</div>
                         </div>
 
                         <div class="partner-card" data-scroll-reveal>
-                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11"></path></svg></div>
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M3 21h18M3 10h18M5 10V7a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3m-1 0v11M6 10v11">
+                                    </path>
+                                </svg></div>
                             <div class="partner-name">MinFoncier</div>
                         </div>
                         <div class="partner-card" data-scroll-reveal>
-                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div>
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                </svg></div>
                             <div class="partner-name">UN-Habitat</div>
                         </div>
                         <div class="partner-card" data-scroll-reveal>
-                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path></svg></div>
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                </svg></div>
                             <div class="partner-name">BAD</div>
                         </div>
                         <div class="partner-card" data-scroll-reveal>
-                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"></rect></svg></div>
+                            <div class="logo-placeholder"><svg width="24" height="24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="7" width="20" height="14" rx="2"></rect>
+                                </svg></div>
                             <div class="partner-name">BCC</div>
                         </div>
 
                     </div>
                 </div>
-                </div>
+            </div>
             </div>
         </section>
     </main>
@@ -387,14 +590,15 @@
                             <span class="logo-text">Foncier<span>Chain</span></span>
                         </a>
                     </div>
-                    <p class="footer-desc">Sécuriser l'avenir foncier du Congo grâce à la technologie blockchain immuable. Chaque titre. Chaque citoyen. Pour toujours.</p>
+                    <p class="footer-desc">Sécuriser l'avenir foncier du Congo grâce à la technologie blockchain
+                        immuable. Chaque titre. Chaque citoyen. Pour toujours.</p>
                     <div class="network-status"><span class="pulse-dot"></span> Réseau Principal Opérationnel</div>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">
                     <h5 class="footer-title">Plateforme</h5>
                     <ul class="footer-list">
                         <li><a href="#">Portail Institutionnel</a></li>
-                        <li><a href="carte.html">Registre Public</a></li>
+                        <li><a href="carte.html">Carte</a></li>
                         <li><a href="portail_public.html">Vérification</a></li>
                     </ul>
                 </div>
@@ -415,7 +619,9 @@
                     <div class="social-row">
                         <a href="#" class="social-btn">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+                                </path>
                             </svg>
                         </a>
                         <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
@@ -428,7 +634,8 @@
                 <div class="col-md-6">© 2026 FoncierChain. République du Congo.</div>
                 <div class="col-md-6 text-end">
                     <div class="cert-icons">
-                        <div class="cert-item"><i class="fas fa-lock" style="color:#10b981"></i> Chiffrement 256 bits</div>
+                        <div class="cert-item"><i class="fas fa-lock" style="color:#10b981"></i> Chiffrement 256 bits
+                        </div>
                         <div class="cert-item"><i class="fas fa-certificate" style="color:#10b981"></i> ISO 27001</div>
                     </div>
                 </div>
@@ -440,4 +647,5 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="js/foncierchain.js"></script>
 </body>
+
 </html>

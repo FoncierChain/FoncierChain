@@ -499,5 +499,10 @@
     .leaflet-control-zoom a:hover { background: var(--fc-border) !important; color: var(--fc-green) !important; }
 
     @media (max-width: 768px) {
-      :root { --sidebar-w: 240px; }
+      :root { --sidebar-w: 100%; }
+      .map-layout { flex-direction: column-reverse; }
+      .fc-sidebar { height: 45vh; min-height: 45vh; flex-shrink: 0; border-right: none; border-top: 2px solid rgba(0,229,122,0.3); }
+      .map-area { flex: 1; height: 55vh; min-height: 55vh; }
+      .fc-navbar { padding: 0 16px; gap: 12px; }
+      .fc-navbar__nav { display: none; /* Masquer la nav principale sur mobile pour gagner de l'espace */ }
     }

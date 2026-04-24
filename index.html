@@ -18,7 +18,13 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Foncier<span>Chain</span></a>
+                <a class="logo-wrapper" href="#">
+                    <div class="logo-icon-box">
+                        <div class="logo-diamond"></div>
+                        <div class="logo-dot"></div>
+                    </div>
+                    <span class="logo-text">Foncier<span>Chain</span></span>
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -29,7 +35,10 @@
                         <li class="nav-item"><a class="nav-link" href="portail_public.html">Vérification</a></li>
                         <li class="nav-item"><a class="nav-link" href="#ecosysteme">Écosystème</a></li>
                     </ul>
-                    <div class="d-flex">
+                    <div class="d-flex align-items-center gap-3">
+                        <button id="theme-toggle" class="btn p-0" style="color: var(--text-muted); font-size: 1.2rem; background: none; border: none;" title="Basculer le thème">
+                            <i class="fas fa-sun"></i>
+                        </button>
                         <a href="#" class="btn-portal-nav">Accéder au Portail</a>
                     </div>
                 </div>
@@ -49,9 +58,9 @@
                             <a href="#" class="btn-outline-custom">Consulter le Registre</a>
                         </div>
                         <div class="row g-4 mt-2 justify-content-center justify-content-lg-start" data-scroll-reveal="left">
-                            <div class="col-4 col-md-auto"><span class="stat-val">2,4M+</span><span class="stat-label-hero">Parcelles</span></div>
-                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val" style="color: var(--accent-green)">99,9%</span><span class="stat-label-hero">Disponibilité</span></div>
-                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val">0</span><span class="stat-label-hero">Fraude</span></div>
+                            <div class="col-4 col-md-auto"><span class="stat-val counter-animate" data-count="2.4" data-suffix="M+">0</span><span class="stat-label-hero">Parcelles</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val counter-animate" data-count="99.9" data-suffix="%" style="color: var(--accent-green)">0</span><span class="stat-label-hero">Disponibilité</span></div>
+                            <div class="col-4 col-md-auto border-start border-white border-opacity-10 ps-4"><span class="stat-val counter-animate" data-count="0">0</span><span class="stat-label-hero">Fraude</span></div>
                         </div>
                     </div>
                     <div class="col-lg-5 order-1 order-lg-2 text-center" data-scroll-reveal="right">
@@ -69,6 +78,34 @@
             </div>
         </section>
 
+        <!-- Trust Bar (Marquee) Hackathon-style -->
+        <section class="trust-bar-section border-y py-4">
+            <div class="marquee-wrapper">
+                <div class="marquee-content trust-marquee">
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span></div>
+
+                    <!-- duplicate for seamless loop -->
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">SÉCURITÉ IMMUABLE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO FRAUDE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">BLOCKCHAIN CONGO</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PROPRIÉTÉ TRANSPARENTE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">REGISTRE DISTRIBUÉ</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">EFFICACITÉ ADMINISTRATIVE</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">PATRIMOINE SÉCURISÉ</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">AUDIT PUBLIC</span></div>
+                    <div class="trust-item"><div class="trust-dot"></div><span class="trust-text">ZÉRO CONFLIT</span></div>
+                </div>
+            </div>
+        </section>
+
         <section id="crise" data-scroll-reveal>
             <div class="container text-center">
                 <span class="section-tag">LA CRISE QUE NOUS RÉSOLVONS</span>
@@ -77,13 +114,13 @@
                 <div class="row g-4 mb-5 pb-4 justify-content-center text-center" data-stagger>
                     <div class="col-6 col-md-4 col-lg-3" data-scroll-reveal>
                         <div class="stat-card">
-                            <span style="font-size: 3rem; font-weight: 700; color: var(--accent-orange); display: block;">60%</span>
+                            <span class="counter-animate" data-count="60" data-suffix="%" style="font-size: 3rem; font-weight: 700; color: var(--accent-orange); display: block;">0</span>
                             <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">des titres fonciers actuellement en litige actif</span>
                         </div>
                     </div>
                     <div class="col-6 col-md-4 col-lg-3" data-scroll-reveal>
                         <div class="stat-card">
-                            <span style="font-size: 3rem; font-weight: 700; color: #fff; display: block;">7+</span>
+                            <span class="counter-animate" data-count="7" data-suffix="+" style="font-size: 3rem; font-weight: 700; color: var(--text-main, #fff); display: block;">0</span>
                             <span style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">années de durée moyenne des litiges fonciers</span>
                         </div>
                     </div>
@@ -136,22 +173,26 @@
                 <div class="search-bar-container">
                     <div class="search-input-wrapper">
                         <span class="search-prefix">>_</span>
-                        <input type="text" class="search-input" placeholder="Entrez un Numéro de Parcelle ou un Hash SHA-256...">
-                        <button class="btn-search">Interroger le Registre</button>
+                        <input type="text" id="search-input-field" class="search-input" placeholder="Entrez un Numéro de Parcelle ou un Hash SHA-256...">
+                        <button id="btn-search-simulate" class="btn-search">Interroger le Registre</button>
                     </div>
                     <div class="suggestions">
                         <span>Essayez :</span>
-                        <span class="chip">#Madibou-482</span>
-                        <span class="chip">#Brazzaville-001</span>
+                        <span class="chip suggestion-chip">#Madibou-482</span>
+                        <span class="chip suggestion-chip">#Brazzaville-001</span>
+                    </div>
+                    <div id="search-loading" style="display: none; align-items: center; justify-content: center; gap: 15px; margin-top: 30px;">
+                        <div class="spinner-border" style="color: var(--accent-green); width: 1.5rem; height: 1.5rem;" role="status"></div>
+                        <span style="color: var(--accent-green); font-weight: 600;">Interrogation du noeud réseau en cours...</span>
                     </div>
                 </div>
-                <div class="result-card" data-scroll-reveal>
+                <div id="search-result-card" class="result-card" style="display: none; opacity: 1; transform: none;">
                     <div class="d-flex align-items-center gap-3 mb-4">
                         <div style="width: 44px; height: 44px; background: rgba(16, 185, 129, 0.15); border: 1px solid var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green);">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
                         </div>
                         <div>
-                            <h3 class="m-0 fw-bold fs-4">#Madibou-482</h3>
+                            <h3 id="result-title" class="m-0 fw-bold fs-4">#Madibou-482</h3>
                             <div style="color: var(--text-muted); font-size: 0.8rem;">Propriétaire Légitime Confirmé.</div>
                         </div>
                     </div>
@@ -242,10 +283,10 @@
                 </div>
                 <div class="stats-bar" data-scroll-reveal>
                     <div class="row align-items-center">
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></div><span class="stat-val" style="font-size: 1.5rem;">2,4M+</span><span class="stat-label-footer">Parcelles</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle></svg></div><span class="stat-val" style="font-size: 1.5rem;">180K+</span><span class="stat-label-footer">Vérifiés</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path></svg></div><span class="stat-val" style="font-size: 1.5rem;">12</span><span class="stat-label-footer">Ministères</span></div></div>
-                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div><span class="stat-val" style="font-size: 1.5rem;"> < 3s</span><span class="stat-label-footer">Vitesse</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></div><span class="stat-val counter-animate" data-count="2.4" data-suffix="M+" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Parcelles</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle></svg></div><span class="stat-val counter-animate" data-count="180" data-suffix="K+" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Vérifiés</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18"></path></svg></div><span class="stat-val counter-animate" data-count="12" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Ministères</span></div></div>
+                        <div class="col-6 col-lg-3"><div class="stat-item"><div class="stat-icon-circle"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg></div><span class="stat-val counter-animate" data-count="3" data-prefix="< " data-suffix="s" style="font-size: 1.5rem;">0</span><span class="stat-label-footer">Vitesse</span></div></div>
                     </div>
                 </div>
             </div>
@@ -338,7 +379,13 @@
             <div class="row g-5">
                 <div class="col-lg-4">
                     <div class="footer-logo">
-                        <a class="navbar-brand" href="#">Foncier<span>Chain</span></a>
+                        <a class="logo-wrapper" href="#">
+                            <div class="logo-icon-box">
+                                <div class="logo-diamond"></div>
+                                <div class="logo-dot"></div>
+                            </div>
+                            <span class="logo-text">Foncier<span>Chain</span></span>
+                        </a>
                     </div>
                     <p class="footer-desc">Sécuriser l'avenir foncier du Congo grâce à la technologie blockchain immuable. Chaque titre. Chaque citoyen. Pour toujours.</p>
                     <div class="network-status"><span class="pulse-dot"></span> Réseau Principal Opérationnel</div>

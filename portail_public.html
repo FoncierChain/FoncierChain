@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vérification Publique | FoncierChain</title>
 
-  <!-- Bootstrap 5 -->
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Google Fonts -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
-  <!-- Bootstrap Icons -->
+  
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
   <link rel="stylesheet" href="css/portail_public.css" />
@@ -19,22 +19,18 @@
 
 <body>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       PARTICLE BACKGROUND
-  ════════════════════════════════════════════════════════════════════ -->
+  
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       NAVBAR
-  ════════════════════════════════════════════════════════════════════ -->
+  
   <header class="fc-navbar" role="banner">
 
-    <!-- Back -->
+    
     <a href="index.html" class="nav-back-btn" aria-label="Retour">
       <i class="bi bi-arrow-left"></i>
     </a>
 
-    <!-- Brand -->
+    
     <div class="nav-brand">
       <div class="nav-brand__icon" aria-hidden="true">
         <i class="bi bi-shield-lock-fill"></i>
@@ -45,7 +41,7 @@
       </div>
     </div>
 
-    <!-- Right actions -->
+    
     <nav class="nav-actions" aria-label="Actions rapides">
       <div class="badge-mainnet" role="status">Mainnet Opérationnel</div>
       <a href="carte.html" class="btn-map">
@@ -55,12 +51,10 @@
     </nav>
   </header>
 
-  <!-- ════════════════════════════════════════════════════════════════════
-       PAGE CONTENT
-  ════════════════════════════════════════════════════════════════════ -->
+  
   <div class="page-wrapper">
 
-    <!-- Hero -->
+    
     <section class="hero-section" aria-labelledby="hero-title">
       <h2 id="hero-title" class="fade-up">Vérifiez un Titre Foncier</h2>
       <p class="fade-up">
@@ -69,11 +63,11 @@
       </p>
     </section>
 
-    <!-- Terminal search card -->
+    
     <div class="terminal-wrapper fade-up" role="search">
       <div class="terminal-card">
 
-        <!-- Title bar -->
+        
         <div class="terminal-titlebar" aria-hidden="true">
           <div class="terminal-dots">
             <span class="terminal-dot dot-red"></span>
@@ -83,14 +77,14 @@
           <span class="terminal-title">foncierchain-verify v2.4.1 — Accès Public</span>
         </div>
 
-        <!-- Body -->
+        
         <div class="terminal-body">
           <div class="terminal-prompt" aria-label="Invite de commande">
             Entrez un ID de parcelle ou un hash SHA-256 pour vérifier
             <span class="cursor-blink" aria-hidden="true"></span>
           </div>
 
-          <!-- Search input row -->
+          
           <div class="search-row">
             <div class="search-input-wrap">
               <input
@@ -110,7 +104,7 @@
             </button>
           </div>
 
-          <!-- Quick tags -->
+          
           <div class="quick-tags" role="list" aria-label="Exemples de recherche rapide">
             <button class="quick-tag" role="listitem" onclick="setQuery('BZV-2024-8821')">BZV-2024-8821</button>
             <button class="quick-tag" role="listitem" onclick="setQuery('MADIBOU-482')">MADIBOU-482</button>
@@ -120,10 +114,10 @@
       </div>
     </div>
 
-    <!-- Result panel -->
+    
     <div class="result-panel" id="result-panel" role="region" aria-live="polite" aria-label="Résultat de la vérification"></div>
 
-    <!-- Feature cards -->
+    
     <section class="features-section" aria-labelledby="features-title">
       <h2 id="features-title" class="visually-hidden">Fonctionnalités</h2>
       <div class="features-grid">
@@ -164,9 +158,9 @@
       </div>
     </section>
 
-  </div><!-- /page-wrapper -->
+  </div>
 
-  <!-- Bootstrap JS -->
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/portail_public.js"></script>
 </body>

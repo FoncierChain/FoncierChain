@@ -43,22 +43,40 @@
         }
         
         /* Hackathon CSS Logo */
-        .logo-wrapper { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none !important; }
-        .logo-icon-box { position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; }
+        .logo-wrapper { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none !important; min-width: 0; }
+        .logo-icon-box { position: relative; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .logo-diamond { position: absolute; inset: 0; border: 2px solid var(--accent-green); transform: rotate(45deg); border-radius: 4px; transition: transform 0.5s ease; }
         .logo-wrapper:hover .logo-diamond { transform: rotate(0deg); }
         .logo-dot { width: 12px; height: 12px; background: var(--accent-green); border-radius: 4px; box-shadow: 0 0 15px var(--accent-green); }
-        .logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 800; letter-spacing: -0.5px; font-size: 1.5rem; color: #fff; }
+        .logo-text { font-family: 'Space Grotesk', sans-serif; font-weight: 800; letter-spacing: -0.5px; font-size: 1.5rem; color: #fff; white-space: nowrap; }
         .logo-text span { color: var(--accent-green); }
         
         .nav-link { font-size: 0.85rem; color: var(--text-muted) !important; margin: 0 10px; transition: 0.3s; }
         .nav-link:hover { color: var(--accent-green) !important; }
-        .btn-portal-nav { background: var(--accent-green); color: #000; font-weight: 700; border-radius: 50px; padding: 10px 24px; border: none; font-size: 0.85rem; transition: 0.3s; text-decoration: none; }
+        .btn-portal-nav { background: var(--accent-green); color: #000; font-weight: 700; border-radius: 50px; padding: 10px 24px; border: none; font-size: 0.85rem; transition: 0.3s; text-decoration: none; white-space: nowrap; }
         .btn-portal-nav:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--accent-glow); color: #000; }
+
+        /* ===== MOBILE NAVBAR FIX ===== */
+        .navbar .container {
+            flex-wrap: nowrap !important;
+        }
+        .logo-wrapper {
+            flex: 1 1 auto;
+            overflow: hidden;
+        }
 
         @media (max-width: 991.98px) {
             .navbar-collapse { background: rgba(3, 8, 22, 0.98); backdrop-filter: blur(15px); margin-top: 15px; padding: 20px; border-radius: 15px; border: 1px solid var(--border-glass); }
             .nav-link { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+            .logo-icon-box { width: 32px; height: 32px; }
+            .logo-text { font-size: 1.2rem; }
+        }
+
+        @media (max-width: 575.98px) {
+            .logo-icon-box { width: 28px; height: 28px; }
+            .logo-text { font-size: 1rem; }
+            .logo-dot { width: 9px; height: 9px; }
+            .btn-portal-nav { padding: 7px 14px; font-size: 0.7rem; }
         }
 
         /* Ensure hamburger is always visible on mobile */
@@ -66,6 +84,7 @@
             border: 1px solid rgba(255, 255, 255, 0.25) !important;
             padding: 6px 10px;
             z-index: 1001;
+            flex-shrink: 0;
         }
         .navbar-toggler:focus {
             box-shadow: 0 0 0 0.15rem rgba(16, 185, 129, 0.4);
@@ -73,6 +92,11 @@
         .navbar-toggler-icon {
             width: 1.2em;
             height: 1.2em;
+        }
+        
+        /* Theme toggle always visible */
+        #theme-toggle {
+            flex-shrink: 0;
         }
 
         .section-tag { color: var(--accent-green); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; text-align: center; display: block; }

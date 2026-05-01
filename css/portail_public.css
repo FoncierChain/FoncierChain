@@ -467,6 +467,47 @@
 
     @media (max-width: 768px) {
       .features-grid { grid-template-columns: 1fr; }
+      .fc-navbar { 
+        padding: 0 12px; 
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+      .nav-brand { overflow: hidden; min-width: 0; flex: 1; }
+      .nav-brand__text h1 { font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .nav-brand__text p { display: none; }
+      .nav-brand__icon { width: 28px; height: 28px; font-size: 13px; flex-shrink: 0; }
+      .nav-back-btn { width: 30px; height: 30px; font-size: 13px; }
+      .nav-actions { gap: 6px; flex-shrink: 0; }
+      .badge-mainnet { display: none; }
+      .btn-map { font-size: 11px; padding: 6px 12px; }
+      .btn-map i { margin-right: 0; }
+      .hero-section { padding: 40px 16px 28px; }
+      .hero-section h2 { font-size: 24px; }
+      .hero-section p { font-size: 14px; }
+      .terminal-wrapper { padding: 0 12px; }
+      .terminal-body { padding: 14px; }
+      .terminal-prompt { font-size: 11px; flex-wrap: wrap; }
+      .search-row { flex-direction: column; gap: 8px; }
+      .btn-verify-main { width: 100%; justify-content: center; padding: 12px 20px; }
+      .search-input { font-size: 12px; padding: 12px 14px; }
+      .terminal-titlebar { padding: 10px 14px; }
+      .terminal-title { font-size: 9px; }
+      .result-panel { padding: 0 12px; }
+      .result-box { padding: 14px 16px; }
+      .result-grid { grid-template-columns: 1fr; }
+      .features-section { padding: 0 12px 40px; margin-top: 30px; }
+      .feature-card { padding: 18px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .fc-navbar { padding: 0 8px; }
+      .nav-brand__text h1 { font-size: 11px; }
+      .btn-map { font-size: 10px; padding: 5px 10px; gap: 4px; }
+      .hero-section h2 { font-size: 20px; }
+      .hero-section p { font-size: 13px; }
+      .search-input { font-size: 11px; }
+      .btn-verify-main { font-size: 12px; }
+      .quick-tag { font-size: 10px; padding: 3px 8px; }
     }
 
     .feature-card {

@@ -500,9 +500,44 @@
 
     @media (max-width: 768px) {
       :root { --sidebar-w: 100%; }
-      .map-layout { flex-direction: column-reverse; }
-      .fc-sidebar { height: 45vh; min-height: 45vh; flex-shrink: 0; border-right: none; border-top: 2px solid rgba(0,229,122,0.3); }
-      .map-area { flex: 1; height: 55vh; min-height: 55vh; }
-      .fc-navbar { padding: 0 16px; gap: 12px; }
-      .fc-navbar__nav { display: none; /* Masquer la nav principale sur mobile pour gagner de l'espace */ }
+      html, body { overflow: auto; height: auto; }
+      .map-layout { flex-direction: column; height: auto; min-height: 100vh; }
+      .fc-sidebar { 
+        width: 100%; min-width: 100%; 
+        height: auto; max-height: 40vh; 
+        flex-shrink: 0; 
+        border-right: none; 
+        border-bottom: 2px solid rgba(0,229,122,0.3);
+        overflow-y: auto;
+      }
+      .map-area { flex: 1; min-height: 55vh; }
+      #map { min-height: 55vh; }
+      .fc-navbar { 
+        padding: 0 12px; 
+        gap: 8px; 
+        flex-wrap: nowrap;
+      }
+      .fc-navbar__logo { font-size: 12px; flex-shrink: 0; }
+      .fc-navbar__nav { display: none; }
+      .fc-navbar__actions { gap: 6px; flex-shrink: 0; }
+      .badge-mainnet { display: none; }
+      .btn-verify { font-size: 11px; padding: 6px 12px; }
+      .btn-verify i { display: none; }
+      .sidebar__header { padding: 12px; }
+      .sidebar__header h1 { font-size: 13px; }
+      .sidebar__header p { font-size: 9px; }
+      .stats-grid { gap: 6px; padding: 8px 12px; }
+      .stat-card { padding: 8px 10px; }
+      .stat-card__value { font-size: 18px; }
+      .stat-card__label { font-size: 9px; }
+      .sidebar__scroll { padding: 10px 12px; gap: 14px; }
+      .map-tile-switcher { bottom: 10px; right: 8px; }
+      .map-coords { bottom: 10px; left: 8px; font-size: 8px; padding: 4px 8px; }
+    }
+
+    @media (max-width: 480px) {
+      .fc-navbar { padding: 0 8px; }
+      .fc-navbar__logo { font-size: 11px; }
+      .btn-verify { font-size: 10px; padding: 5px 10px; }
+      .sidebar__header .back-btn { font-size: 10px; }
     }

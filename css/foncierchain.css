@@ -61,6 +61,20 @@
             .nav-link { padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         }
 
+        /* Ensure hamburger is always visible on mobile */
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            padding: 6px 10px;
+            z-index: 1001;
+        }
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.15rem rgba(16, 185, 129, 0.4);
+        }
+        .navbar-toggler-icon {
+            width: 1.2em;
+            height: 1.2em;
+        }
+
         .section-tag { color: var(--accent-green); font-size: 0.7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; text-align: center; display: block; }
         .section-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.1; letter-spacing: -2px; text-align: center; margin-bottom: 2rem; }
         .section-desc { color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; max-width: 700px; margin: 0 auto 60px; text-align: center; }
@@ -188,16 +202,76 @@
         .btn-secondary-outline:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-5px); }
 
         @media (max-width: 991.98px) {
-            .hero { text-align: center; padding-top: 120px; }
-            .hero-desc { margin: 0 auto 40px; }
+            .hero { text-align: center; padding-top: 120px; padding-bottom: 60px; }
+            .hero h1 { font-size: clamp(1.8rem, 7vw, 2.8rem); letter-spacing: -1px; }
+            .hero-desc { margin: 0 auto 30px; font-size: 0.95rem; }
+            .btn-verify, .btn-outline-custom { padding: 14px 24px; font-size: 0.8rem; width: 100%; text-align: center; box-sizing: border-box; }
+            
+            /* Floating tags: hide on very small, reposition on medium */
+            .floating-tag { display: none; }
+            
+            /* Sections */
+            #crise { padding: 60px 0; }
+            .card-body-crise { padding: 20px; }
+            .card-title-crise { font-size: 1.3rem; }
+            .crise-img-container { height: 160px; }
+            .fiche-parcelle { padding: 15px; }
+            .fiche-info { font-size: 0.7rem; }
+            .stat-card { padding: 20px 10px; }
+            
+            /* Verification */
+            #verification { padding: 60px 0; }
             .info-grid { grid-template-columns: 1fr; }
             .search-input-wrapper { flex-direction: column; padding: 10px; }
-            .btn-search { width: 100%; margin-top: 10px; justify-content: center; }
+            .search-input { font-size: 0.85rem; padding: 10px 12px; }
+            .btn-search { width: 100%; margin-top: 10px; justify-content: center; padding: 12px 16px; }
+            .result-card { padding: 20px; margin-top: 25px; }
+            .suggestions { flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+            
+            /* Ecosystem */
+            #ecosysteme { padding: 60px 0; }
+            .pillar-card { padding: 25px; }
+            .pillar-title { font-size: 1.2rem; }
             .store-btns { flex-direction: column; }
-            .stats-bar .row > div { border-bottom: 1px solid var(--border-glass); padding: 20px 0; }
+            .stats-bar { padding: 20px; margin-top: 30px; }
+            .stats-bar .row > div { border-bottom: 1px solid var(--border-glass); padding: 15px 0; }
             .stats-bar .row > div:last-child { border: none; }
+            
+            /* CTA */
+            .cta-transition { padding: 80px 0; }
+            .cta-desc { font-size: 1rem; margin-bottom: 30px; }
             .cta-btns-group { flex-direction: column; align-items: center; }
-            .btn-main, .btn-secondary-outline { width: 100%; max-width: 400px; justify-content: center; }
+            .btn-main, .btn-secondary-outline { width: 100%; max-width: 400px; justify-content: center; padding: 15px 30px; font-size: 0.9rem; }
+            
+            /* Partners */
+            .partners-section { padding: 60px 0; }
+            .partners-label { font-size: 0.7rem; margin-bottom: 30px; }
+            .partner-card { width: 180px; padding: 20px 15px; }
+            
+            /* Footer */
+            .main-footer { padding: 60px 0 30px; }
+            .footer-desc { font-size: 0.85rem; }
+            .bottom-bar { margin-top: 40px; text-align: center; }
+            .cert-icons { justify-content: center; flex-wrap: wrap; gap: 15px; }
+            .bottom-bar .col-md-6 { text-align: center !important; margin-bottom: 10px; }
+            .newsletter-input { padding: 12px 55px 12px 15px; font-size: 0.85rem; }
+            .social-row { justify-content: center; }
+            .footer-logo { justify-content: center; }
+        }
+
+        @media (max-width: 575.98px) {
+            .hero { padding-top: 100px; padding-bottom: 40px; }
+            .hero h1 { font-size: 1.6rem; }
+            .section-title { font-size: 1.5rem; letter-spacing: -1px; }
+            .section-desc { font-size: 0.9rem; margin-bottom: 30px; }
+            .logo-text { font-size: 1.2rem; }
+            .btn-portal-nav { padding: 8px 16px; font-size: 0.75rem; }
+            .trust-item { padding: 0 15px; }
+            .trust-text { font-size: 0.7rem; letter-spacing: 0.15em; }
+            .fiche-info { font-size: 0.65rem; }
+            .result-card { padding: 15px; border-radius: 14px; }
+            .info-box { padding: 12px; }
+            .hash-value { font-size: 0.6rem; }
         }
 
         .partners-section {

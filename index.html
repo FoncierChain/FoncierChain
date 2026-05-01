@@ -28,23 +28,31 @@
                     </div>
                     <span class="logo-text">Foncier<span>Chain</span></span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+
+                <!-- These controls stay OUTSIDE the collapse so they're always visible on mobile -->
+                <div class="d-flex align-items-center gap-2 order-lg-last">
+                    <button id="theme-toggle" class="btn p-0"
+                        style="color: var(--text-muted); font-size: 1.2rem; background: none; border: none;"
+                        title="Basculer le thème">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <a href="http://localhost:3000/register" class="btn-portal-nav d-none d-lg-inline-block">Accéder au Portail</a>
+                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item"><a class="nav-link" href="#hero">Plateforme</a></li>
-                        <li class="nav-item"><a class="nav-link" href="carte.html">Carte</a></li>
-                        <li class="nav-item"><a class="nav-link" href="portail_public.html">Vérification</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:3000/map">Carte</a></li>
+                        <li class="nav-item"><a class="nav-link" href="http://localhost:3000/portal">Vérification</a></li>
                         <li class="nav-item"><a class="nav-link" href="#ecosysteme">Écosystème</a></li>
                     </ul>
-                    <div class="d-flex align-items-center gap-3">
-                        <button id="theme-toggle" class="btn p-0"
-                            style="color: var(--text-muted); font-size: 1.2rem; background: none; border: none;"
-                            title="Basculer le thème">
-                            <i class="fas fa-sun"></i>
-                        </button>
-                        <a href="#" class="btn-portal-nav">Accéder au Portail</a>
+                    <!-- Mobile-only CTA inside the menu -->
+                    <div class="d-lg-none text-center py-3">
+                        <a href="http://localhost:3000/register" class="btn-portal-nav">Accéder au Portail</a>
                     </div>
                 </div>
             </div>
@@ -344,7 +352,7 @@
                                         <polyline points="20 6 9 17 4 12"></polyline>
                                     </svg> Piste d'audit complète</li>
                             </ul>
-                            <a href="#" class="btn-pillar">Accéder au Portail</a>
+                            <a href="http://localhost:3000/register" class="btn-pillar">Accéder au Portail</a>
                         </div>
                     </div>
                     <div class="col-lg-4" data-scroll-reveal>
@@ -363,7 +371,7 @@
                                 titre foncier en quelques secondes.</p>
                             <div class="mt-4"><span class="mini-badge">Accès Libre</span><span class="mini-badge">Temps
                                     Réel</span></div>
-                            <a href="#" class="btn-pillar">Accéder au registre public</a>
+                            <a href="http://localhost:3000/portal" class="btn-pillar">Accéder au registre public</a>
                         </div>
                     </div>
                     <div class="col-lg-4" data-scroll-reveal>
@@ -597,9 +605,9 @@
                 <div class="col-lg-2 col-md-4 col-6">
                     <h5 class="footer-title">Plateforme</h5>
                     <ul class="footer-list">
-                        <li><a href="#">Portail Institutionnel</a></li>
-                        <li><a href="carte.html">Carte</a></li>
-                        <li><a href="portail_public.html">Vérification</a></li>
+                        <li><a href="http://localhost:3000/register">Portail Institutionnel</a></li>
+                        <li><a href="http://localhost:3000/map">Carte</a></li>
+                        <li><a href="http://localhost:3000/portal">Vérification</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-4 col-6">

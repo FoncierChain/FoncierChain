@@ -1,18 +1,4 @@
-  const PARCELLES = [
-    { id: 'MADIBOU-482',    district: 'Madibou',   type: 'Résidentiel', status: 'confirmed', area: '680 m²',  owner: 'Jean-Baptiste Moukala', lat: -4.3350, lng: 15.2580 },
-    { id: 'BZV-2024-8817',  district: 'Madibou',   type: 'Commercial',  status: 'litige',    area: '890 m²',  owner: 'Fabrice Nzimba',        lat: -4.3280, lng: 15.2450 },
-    { id: 'PTR-2023-0041',  district: 'Poto-Poto', type: 'Résidentiel', status: 'confirmed', area: '520 m²',  owner: 'Marie-Claire Ossete',   lat: -4.2600, lng: 15.2900 },
-    { id: 'PTR-2023-0105',  district: 'Poto-Poto', type: 'Résidentiel', status: 'confirmed', area: '430 m²',  owner: 'Christophe Itoua',      lat: -4.2700, lng: 15.3050 },
-    { id: 'MGL-2022-0017',  district: 'Moungali',  type: 'Résidentiel', status: 'confirmed', area: '610 m²',  owner: 'Solange Ngoma',         lat: -4.2300, lng: 15.2700 },
-    { id: 'MGL-2022-0089',  district: 'Moungali',  type: 'Agricole',    status: 'confirmed', area: '1240 m²', owner: 'Antoine Moussoki',      lat: -4.2450, lng: 15.2600 },
-    { id: 'BCG-2024-0331',  district: 'Bacongo',   type: 'Résidentiel', status: 'confirmed', area: '740 m²',  owner: 'Pauline Bitemo',        lat: -4.3100, lng: 15.2800 },
-    { id: 'BCG-2024-0478',  district: 'Bacongo',   type: 'Commercial',  status: 'confirmed', area: '310 m²',  owner: 'Robert Dzabana',        lat: -4.3200, lng: 15.3100 },
-    { id: 'TLG-2021-0012',  district: 'Talangaï',  type: 'Résidentiel', status: 'confirmed', area: '560 m²',  owner: 'Véronique Mabika',      lat: -4.2050, lng: 15.3500 },
-    { id: 'TLG-2021-0099',  district: 'Talangaï',  type: 'Industriel',  status: 'pending',   area: '2100 m²', owner: 'Société CONGO-BUILD',   lat: -4.2000, lng: 15.3400 },
-    { id: 'PTR-2024-1102',  district: 'Poto-Poto', type: 'Résidentiel', status: 'litige',    area: '480 m²',  owner: 'Pierre Mabangui',       lat: -4.2550, lng: 15.3150 },
-    { id: 'MDB-2023-0277',  district: 'Madibou',   type: 'Résidentiel', status: 'confirmed', area: '720 m²',  owner: 'Yvonne Kimbembe',       lat: -4.3400, lng: 15.2700 },
-  ];
-
+  let PARCELLES = [];
   let activeStatus  = 'all';
   let activeDistrict = 'all';
   let activeType    = 'all';
@@ -48,39 +34,7 @@
       `Lat: ${e.latlng.lat.toFixed(4)}° | Lng: ${e.latlng.lng.toFixed(4)}°`;
   });
 
-  function makeIcon(color, shadow) {
-    return L.divIcon({
-      className: '',
-      html: `
-        <div style="
-          width:28px;height:28px;
-          border-radius:50% 50% 50% 0;
-          transform:rotate(-45deg);
-          background:${color};
-          border:3px solid rgba(255,255,255,.25);
-          box-shadow:0 0 10px ${shadow},0 3px 8px rgba(0,0,0,.5);
-          display:flex;align-items:center;justify-content:center;
-        ">
-          <div style="
-            width:8px;height:8px;
-            border-radius:50%;
-            background:rgba(255,255,255,.9);
-            transform:rotate(45deg);
-          "></div>
-        </div>`,
-      iconSize:   [28, 28],
-      iconAnchor: [14, 28],
-      popupAnchor:[0, -30],
-    });
-  }
-
-  const ICONS = {
-    confirmed: makeIcon('#00e57a', 'rgba(0,229,122,.6)'),
-    litige:    makeIcon('#ff3b5c', 'rgba(255,59,92,.6)'),
-    pending:   makeIcon('#ffb020', 'rgba(255,176,32,.5)'),
-  };
-
-  const STATUS_LABELS = { confirmed: 'Confirmé', litige: 'Litige', pending: 'En Attente' };
+  const STATUS_LABELS = { confirmed: 'Confirmé', litige: 'Brouillon', pending: 'En Attente' };
   const STATUS_BADGE  = { confirmed: 'popup__badge--confirmed', litige: 'popup__badge--litige', pending: 'popup__badge--pending' };
   const DOT_CLASS     = { confirmed: 'dot-green', litige: 'dot-red', pending: 'dot-orange' };
 
@@ -111,11 +65,59 @@
   }
 
   function addMarkers() {
+    Object.values(markerMap).forEach(entry => map.removeLayer(entry.marker));
+    markerMap = {};
+
     PARCELLES.forEach(p => {
-      const m = L.marker([p.lat, p.lng], { icon: ICONS[p.status] })
-        .bindPopup(buildPopup(p), { maxWidth: 240, className: '' });
-      m.addTo(map);
-      markerMap[p.id] = { marker: m, data: p };
+      if (p.coordinates && p.coordinates.length >= 3) {
+        let color = '#00e57a'; // confirmed / FINALIZED
+        if (p.status === 'litige') color = '#3b82f6'; // DRAFT (Bleu)
+        if (p.status === 'pending') color = '#f59e0b'; // COMMUNITY_VALIDATED (Orange)
+
+        const elements = [];
+
+        const outerBorder = L.polygon(p.coordinates, {
+          color: '#ffffff', fillColor: 'transparent', fillOpacity: 0, weight: 5, opacity: 0.8, dashArray: '', lineCap: 'square', lineJoin: 'miter'
+        });
+        elements.push(outerBorder);
+
+        const polygon = L.polygon(p.coordinates, {
+          color: color, fillColor: color, fillOpacity: 0.25, weight: 3, opacity: 1, dashArray: '8, 4', lineCap: 'square', lineJoin: 'miter'
+        });
+        polygon.bindPopup(buildPopup(p), { maxWidth: 240, className: '' });
+        elements.push(polygon);
+
+        p.coordinates.forEach(coord => {
+          const cornerMarker = L.circleMarker(coord, {
+            radius: 5, color: '#ffffff', fillColor: color, fillOpacity: 1, weight: 2
+          });
+          elements.push(cornerMarker);
+        });
+
+        const center = polygon.getBounds().getCenter();
+        const label = L.marker(center, {
+          icon: L.divIcon({
+            className: 'parcel-label',
+            html: `<div style="background: rgba(0,0,0,0.85);color: ${color};padding: 4px 10px;border-radius: 6px;font-size: 11px;font-weight: 800;white-space: nowrap;border: 2px solid ${color};box-shadow: 0 2px 12px rgba(0,0,0,0.6);text-align: center;line-height: 1.4;font-family: 'Space Mono', monospace;"><div>${p.id}</div><div style="font-size:8px;color:#ccc;font-weight:400;">${p.area} · ${p.type}</div></div>`,
+            iconSize: [0, 0],
+            iconAnchor: [50, 20]
+          })
+        });
+        label.bindPopup(buildPopup(p), { maxWidth: 240, className: '' });
+        elements.push(label);
+
+        polygon.on('mouseover', () => {
+          polygon.setStyle({ fillOpacity: 0.5, weight: 4, dashArray: '' });
+          outerBorder.setStyle({ weight: 6, color: color });
+        });
+        polygon.on('mouseout', () => {
+          polygon.setStyle({ fillOpacity: 0.25, weight: 3, dashArray: '8, 4' });
+          outerBorder.setStyle({ weight: 5, color: '#ffffff' });
+        });
+
+        const group = L.featureGroup(elements);
+        markerMap[p.id] = { marker: group, polygon: polygon, data: p };
+      }
     });
   }
 
@@ -137,7 +139,7 @@
     const entry = markerMap[id];
     if (!entry) return;
     map.flyTo([entry.data.lat, entry.data.lng], 16, { duration: 1 });
-    entry.marker.openPopup();
+    entry.polygon.openPopup();
     document.querySelectorAll('.parcelle-item').forEach(el => el.classList.remove('active'));
     const el = [...document.querySelectorAll('.parcelle-item')]
       .find(el => el.querySelector('.parcelle-item__id').textContent === id);
@@ -184,6 +186,15 @@
     });
 
     renderList(filtered);
+    
+    // Fit bounds
+    const layers = Object.values(markerMap)
+      .filter(entry => filteredIds.has(entry.data.id))
+      .map(entry => entry.marker);
+    if (layers.length > 0) {
+      const group = L.featureGroup(layers);
+      map.fitBounds(group.getBounds(), { padding: [40, 40] });
+    }
   }
 
   function switchTile(name, btn) {
@@ -232,5 +243,31 @@
     }
   }
 
-  addMarkers();
-  renderList(PARCELLES);
+  async function fetchMapData() {
+    try {
+      const res = await fetch('https://foncierchain-web1.onrender.com/api/v1/map/');
+      if (!res.ok) throw new Error('API Error');
+      const data = await res.json();
+      
+      PARCELLES = data.map(r => ({
+        id: r.parcelId,
+        district: r.address || 'Brazzaville',
+        type: r.usage || 'Résidentiel',
+        status: r.status === 'FINALIZED' ? 'confirmed' : (r.status === 'COMMUNITY_VALIDATED' ? 'pending' : 'litige'),
+        area: r.surface + ' m²',
+        owner: r.currentOwner || 'Inconnu',
+        coordinates: r.coordinates,
+        lat: r.coordinates && r.coordinates.length > 0 ? r.coordinates[0][0] : 0,
+        lng: r.coordinates && r.coordinates.length > 0 ? r.coordinates[0][1] : 0,
+        hash: r.hash
+      }));
+
+      addMarkers();
+      updateMap();
+    } catch (e) {
+      console.error("Erreur chargement carte", e);
+    }
+  }
+
+  // Initialisation
+  fetchMapData();

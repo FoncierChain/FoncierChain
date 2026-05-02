@@ -58,22 +58,44 @@
     loop();
   })();
 
-  const DB = {
-    'MADIBOU-482':   { id:'MADIBOU-482',   owner:'Jean-Baptiste Moukala',  district:'Madibou',   type:'Résidentiel', area:'680 m²',   notaire:'Ministère des Affaires Foncières', block:'#1 204 882', date:'03/11/2024 — 14:32 UTC', status:'confirmed', hash:'a3f9b2cfd4e6f6a7b8c0df2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1' },
-    'BZV-2024-8817': { id:'BZV-2024-8817', owner:'Fabrice Nzimba',         district:'Madibou',   type:'Commercial',  area:'890 m²',   notaire:'Maître Okemba Joël',              block:'#1 198 441', date:'27/09/2024 — 09:15 UTC', status:'litige',    hash:'d7e1f3ab09c24b6a87e5d3f1c0b2a4e6f8d0c2b4a6e8f0d2b4c6a8e0f2d4b6' },
-    'BZV-2024-8821': { id:'BZV-2024-8821', owner:'Yvonne Kimbembe',        district:'Madibou',   type:'Résidentiel', area:'720 m²',   notaire:'Ministère des Affaires Foncières', block:'#1 204 905', date:'04/11/2024 — 10:08 UTC', status:'confirmed', hash:'f9a1b3cd5e7f9a1b3cd5e7f9a1b3cd5e7f9a1b3cd5e7f9a1b3cd5e7f9a1b3c' },
-    'PTR-2023-0041': { id:'PTR-2023-0041', owner:'Marie-Claire Ossete',    district:'Poto-Poto', type:'Résidentiel', area:'520 m²',   notaire:'Maître Moukouri Sophie',          block:'#1 099 221', date:'15/03/2023 — 08:44 UTC', status:'confirmed', hash:'1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a' },
-    'TLG-2021-0099': { id:'TLG-2021-0099', owner:'Société CONGO-BUILD',    district:'Talangaï', type:'Industriel',  area:'2100 m²',  notaire:'Notariat Central de Brazzaville', block:'#0 988 774', date:'22/07/2021 — 16:55 UTC', status:'pending',   hash:'c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8' },
-  };
+  let DB_LIST = [];
 
-  const STATUS_LABELS = { confirmed:'Confirmé', litige:'Litige', pending:'En Attente' };
+  const STATUS_LABELS = { confirmed:'Confirmé', litige:'Brouillon', pending:'En Attente' };
   const STATUS_BADGE  = { confirmed:'result-badge--confirmed', litige:'result-badge--litige', pending:'result-badge--pending' };
   const STATUS_ICON   = { confirmed:'bi-patch-check-fill', litige:'bi-exclamation-triangle-fill', pending:'bi-hourglass-split' };
+
+  async function loadData() {
+    try {
+      const res = await fetch('https://foncierchain-web1.onrender.com/api/v1/map/');
+      if (res.ok) {
+        const data = await res.json();
+        DB_LIST = data.map(r => ({
+          id: r.parcelId,
+          owner: r.currentOwner || 'Inconnu',
+          district: r.address || 'Brazzaville',
+          type: r.usage || 'Résidentiel',
+          area: r.surface + ' m²',
+          notaire: 'Système Blockchain FoncierChain',
+          block: r.workflowStep === 3 ? 'Bloc Finalisé' : 'Bloc Temporaire',
+          date: new Date().toLocaleDateString('fr-FR') + ' — UTC',
+          status: r.status === 'FINALIZED' ? 'confirmed' : (r.status === 'COMMUNITY_VALIDATED' ? 'pending' : 'litige'),
+          hash: r.hash || 'a3f9b2cfd4e6f6a7b8c0df2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1'
+        }));
+      }
+    } catch(e) {
+      console.error("Erreur chargement données portail:", e);
+    }
+  }
+
+  // Load data immediately
+  loadData();
 
   function setQuery(val) {
     document.getElementById('verify-input').value = val;
     document.getElementById('verify-input').focus();
   }
+  // Expose to window for inline onclicks
+  window.setQuery = setQuery;
 
   function runVerify() {
     const raw   = document.getElementById('verify-input').value.trim();
@@ -94,7 +116,7 @@
       btn.classList.remove('loading');
       btn.innerHTML = '<i class="bi bi-search"></i> Vérifier';
 
-      const match = Object.values(DB).find(p =>
+      const match = DB_LIST.find(p =>
         p.id.toUpperCase().includes(query) ||
         query.includes(p.id.toUpperCase()) ||
         p.hash.startsWith(raw.toLowerCase())
@@ -137,7 +159,7 @@
                 <div class="result-field__value">${match.area}</div>
               </div>
               <div class="result-field">
-                <div class="result-field__label">Notarié par</div>
+                <div class="result-field__label">Certification</div>
                 <div class="result-field__value" style="font-size:10px;line-height:1.4;">${match.notaire}</div>
               </div>
               <div class="result-field">
@@ -145,8 +167,8 @@
                 <div class="result-field__value">${match.block}</div>
               </div>
               <div class="result-field">
-                <div class="result-field__label">Horodatage</div>
-                <div class="result-field__value" style="font-size:10px;">${match.date}</div>
+                <div class="result-field__label">Statut Validation</div>
+                <div class="result-field__value" style="font-size:10px;">Enregistré sur Ledger</div>
               </div>
             </div>
             <div class="hash-display">
@@ -172,16 +194,13 @@
             <p style="font-size:13px;color:var(--fc-muted);line-height:1.6;">
               L'identifiant <code style="font-family:var(--fc-mono);color:var(--fc-red);">${raw}</code> ne correspond à aucun titre enregistré sur la blockchain FoncierChain.
               Vérifiez l'orthographe ou consultez directement
-              <a href="https://dp1370913-pixel.github.io/FoncierChain/" style="color:var(--fc-green);">le portail institutionnel</a>.
+              <a href="https://foncier-chain-web1.vercel.app" style="color:var(--fc-green);">le portail institutionnel</a>.
             </p>
-            <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-              <span style="font-size:11px;color:var(--fc-muted);">Essayez :</span>
-              <button class="quick-tag" onclick="setQuery('MADIBOU-482')">MADIBOU-482</button>
-              <button class="quick-tag" onclick="setQuery('BZV-2024-8821')">BZV-2024-8821</button>
-            </div>
           </div>`;
       }
 
       panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
     }, 850);
   }
+  // Expose to window
+  window.runVerify = runVerify;

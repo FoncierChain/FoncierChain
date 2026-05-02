@@ -58,37 +58,9 @@
     loop();
   })();
 
-  let DB_LIST = [];
-
   const STATUS_LABELS = { confirmed:'Confirmé', litige:'Brouillon', pending:'En Attente' };
   const STATUS_BADGE  = { confirmed:'result-badge--confirmed', litige:'result-badge--litige', pending:'result-badge--pending' };
   const STATUS_ICON   = { confirmed:'bi-patch-check-fill', litige:'bi-exclamation-triangle-fill', pending:'bi-hourglass-split' };
-
-  async function loadData() {
-    try {
-      const res = await fetch('https://foncierchain-web1.onrender.com/api/v1/map/');
-      if (res.ok) {
-        const data = await res.json();
-        DB_LIST = data.map(r => ({
-          id: r.parcelId,
-          owner: r.currentOwner || 'Inconnu',
-          district: r.address || 'Brazzaville',
-          type: r.usage || 'Résidentiel',
-          area: r.surface + ' m²',
-          notaire: 'Système Blockchain FoncierChain',
-          block: r.workflowStep === 3 ? 'Bloc Finalisé' : 'Bloc Temporaire',
-          date: new Date().toLocaleDateString('fr-FR') + ' — UTC',
-          status: r.status === 'FINALIZED' ? 'confirmed' : (r.status === 'COMMUNITY_VALIDATED' ? 'pending' : 'litige'),
-          hash: r.hash || 'a3f9b2cfd4e6f6a7b8c0df2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1'
-        }));
-      }
-    } catch(e) {
-      console.error("Erreur chargement données portail:", e);
-    }
-  }
-
-  // Load data immediately
-  loadData();
 
   function setQuery(val) {
     document.getElementById('verify-input').value = val;
@@ -97,7 +69,7 @@
   // Expose to window for inline onclicks
   window.setQuery = setQuery;
 
-  function runVerify() {
+  async function runVerify() {
     const raw   = document.getElementById('verify-input').value.trim();
     const query = raw.replace(/^#/, '').toUpperCase();
     const panel = document.getElementById('result-panel');
@@ -112,16 +84,34 @@
     btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Vérification…';
     panel.style.display = 'none';
 
-    setTimeout(() => {
-      btn.classList.remove('loading');
-      btn.innerHTML = '<i class="bi bi-search"></i> Vérifier';
+    try {
+      // Fetch latest data from the backend
+      const res = await fetch('https://foncierchain-web1.onrender.com/api/v1/map/');
+      let dbList = [];
+      if (res.ok) {
+        const data = await res.json();
+        dbList = data.map(r => ({
+          id: r.parcelId,
+          owner: r.currentOwner || 'Inconnu',
+          district: r.address || 'Brazzaville',
+          type: r.usage || 'Résidentiel',
+          area: r.surface + ' m²',
+          notaire: 'Système Blockchain FoncierChain',
+          block: r.workflowStep === 3 ? 'Bloc Finalisé' : 'Bloc Temporaire',
+          date: new Date().toLocaleDateString('fr-FR') + ' — UTC',
+          status: r.status === 'FINALIZED' ? 'confirmed' : (r.status === 'COMMUNITY_VALIDATED' ? 'pending' : 'litige'),
+          hash: r.hash || 'a3f9b2cfd4e6f6a7b8c0df2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1'
+        }));
+      }
 
-      const match = DB_LIST.find(p =>
+      const match = dbList.find(p =>
         p.id.toUpperCase().includes(query) ||
         query.includes(p.id.toUpperCase()) ||
         p.hash.startsWith(raw.toLowerCase())
       );
 
+      btn.classList.remove('loading');
+      btn.innerHTML = '<i class="bi bi-search"></i> Vérifier';
       panel.style.display = 'block';
 
       if (match) {
@@ -134,7 +124,7 @@
               </div>
               <div>
                 <div class="result-header__title">Titre trouvé — Propriétaire légitime confirmé</div>
-                <div class="result-header__sub">Interrogation du registre blockchain — réponse en 0.8s</div>
+                <div class="result-header__sub">Interrogation du registre blockchain — réponse en temps réel</div>
               </div>
             </div>
             <div class="result-grid">
@@ -200,7 +190,12 @@
       }
 
       panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
-    }, 850);
+    } catch(e) {
+      console.error("Erreur de recherche:", e);
+      btn.classList.remove('loading');
+      btn.innerHTML = '<i class="bi bi-search"></i> Vérifier';
+      alert("Erreur de connexion à la Blockchain. Veuillez réessayer.");
+    }
   }
   // Expose to window
   window.runVerify = runVerify;
